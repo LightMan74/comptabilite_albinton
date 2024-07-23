@@ -19,6 +19,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
+    if ($_POST["DATE_FACTURE"] != '') {
+        $splitdate = explode("-", $_POST["DATE_FACTURE"]);
+        $_POST["DATE_FACTURE"] =  $splitdate[2]."/".$splitdate[1]."/".$splitdate[0];
+    }
+    if ($_POST["DATE_PAYEMENT"] != '') {
+        $splitdate = explode("-", $_POST["DATE_PAYEMENT"]);
+        $_POST["DATE_PAYEMENT"] =  $splitdate[2]."/".$splitdate[1]."/".$splitdate[0];
+    }
+
     if (isset($_POST['modifitem']) || isset($_POST['additem'])) {
         if (isset($_POST['additem'])) {
             $sql .= "INSERT INTO `comptabilite` SET ";
@@ -26,12 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql .= "UPDATE `comptabilite` SET ";
         }
         if ($_POST["DATE_FACTURE"] != '') {
-            $splitdate = explode("-", $_POST["DATE_FACTURE"]);
-            $_POST["DATE_FACTURE"] =  $splitdate[2]."/".$splitdate[1]."/".$splitdate[0];
-        }
-        if ($_POST["DATE_PAYEMENT"] != '') {
-            $splitdate = explode("-", $_POST["DATE_PAYEMENT"]);
-            $_POST["DATE_PAYEMENT"] =  $splitdate[2]."/".$splitdate[1]."/".$splitdate[0];
+            $sql .=  "`DATE_FACTURE`='".$_POST["DATE_FACTURE"]."',";
         }
         if ($_POST["DEBIT"] != '') {
             $sql .=  "`DEBIT`='".strtolower($_POST["DEBIT"])."',";
@@ -50,6 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql .=  "`CLIENTS_FOURNISEUR`='".strtoupper(str_replace("'", "\'", $_POST["CLIENT"]))."',";
         if ($_POST["REMARQUE"] != '') {
             $sql .=  "`REMARQUE_DIVERSE`='".strtoupper(str_replace("'", "\'", $_POST["REMARQUE"]))."',";
+        }
+        if ($_POST["DATE_PAYEMENT"] != '') {
+            $sql .=  "`DATE_PAYEMENT`='".str_replace("'", "\'", $_POST["DATE_PAYEMENT"])."',";
         }
         if ($_POST["CB"] != '') {
             $sql .=  "`CB`='".$_POST["CB"]."',";
