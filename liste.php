@@ -30,7 +30,7 @@
     if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1' && (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] != true)) {
         ?>
     <script type="text/javascript">
-        window.location.href = "login.php";
+    window.location.href = "login.php";
     </script>
     <?php
     }
@@ -67,9 +67,9 @@
                 <th colspan="8">
                     <div class="nav-fullscreen">
                         <ul class="nav-fullscreen__items">
-                            <input class="btn btn-outline-danger btncat" value="VOIR EXPORT COMPTABLE" onclick="window.open('', '_blank');" />
+                            <!-- <input class="btn btn-outline-danger btncat" value="VOIR EXPORT COMPTABLE" onclick="window.open('', '_blank');" />
                             <br>
-                            <input class="btn btn-outline-danger btncat" value="GENERER EXPORT COMPTABLE" onclick="window.open('', '_blank');" />
+                            <input class="btn btn-outline-danger btncat" value="GENERER EXPORT COMPTABLE" onclick="window.open('', '_blank');" /> -->
                             <br>
                             <br>
                             <?php echo 'Utillisateur : ' . htmlspecialchars($_SESSION["username"]); ?>

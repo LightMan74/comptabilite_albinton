@@ -1,28 +1,28 @@
 <script>
-const isMobile = {
-    Android: function() {
-        return navigator.userAgent.match(/Android/i);
-    },
-    BlackBerry: function() {
-        return navigator.userAgent.match(/BlackBerry/i);
-    },
-    iOS: function() {
-        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-    },
-    Opera: function() {
-        return navigator.userAgent.match(/Opera Mini/i);
-    },
-    Windows: function() {
-        return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
-    },
-    any: function() {
-        if (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()) {
-            return '_blank';
-        } else {
-            return '_compta';
+    const isMobile = {
+        Android: function() {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function() {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function() {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function() {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+            return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
+        },
+        any: function() {
+            if (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()) {
+                return '_blank';
+            } else {
+                return '_compta';
+            }
         }
-    }
-};
+    };
 </script>
 
 <?php
@@ -108,7 +108,6 @@ function loadpieces()
     if (mysqli_num_rows($result2) > 0) {
         while ($row = mysqli_fetch_assoc($result2)) {
             echo '<br>COMPTE COURANT --> <span id="COMPTE_COURANT">'.$row["compte_reel"].'</span> €';
-            echo ' --- COMPTE RBS --> <span id="COMPTE_COURANT_RBS">'.$row["compte_rbs"].'</span> €';
             echo ' --- A PAYER --> <span id="COMPTE_COURANT_APAYER">'.sprintf('%0.2f', (($row["compte_reel"] - $row["compte_after_rbs"]) - $row["compte_rbs"])).'</span> €';
             echo ' --- COMPTE COURANT APRES RBS ET PAYEMENT --> <span id="COMPTE_COURANT_REEL">'.$row["compte_after_rbs"].'</span> €';
         }
@@ -143,9 +142,9 @@ function loadpieces()
 </thead>
 <tbody>
     <script>
-    function sendform(sendform) {
-        document.getElementById(sendform).submit();
-    }
+        function sendform(sendform) {
+            document.getElementById(sendform).submit();
+        }
     </script>
     <?php
 
@@ -172,9 +171,9 @@ function loadpieces()
             echo "</td>";
             ?>
     <script>
-    $(function() {
-        $("#<?php echo $row["N_FACTURE"].$row["id"] ?>").attr('target', isMobile.any());
-    });
+        $(function() {
+            $("#<?php echo $row["N_FACTURE"].$row["id"] ?>").attr('target', isMobile.any());
+        });
     </script>
 
     <?php
@@ -230,26 +229,26 @@ function loadpieces()
 ?>
 
 <script>
-document.addEventListener('click', function(event) {
-    var name = event.key;
-    var code = event.code;
-    var clickctrl = event.ctrlKey
-    // Alert the key name and key code on keydown
-    if (clickctrl) {
-        // console.log(`Key DOWN ${name} \r\n Key code value: ${code}`);
-        var anchors = document.querySelectorAll("#searchclienttab");
-        for (var i = 0; i < anchors.length; i++) {
-            anchors[i].setAttribute('target', '_newone');
+    document.addEventListener('click', function(event) {
+        var name = event.key;
+        var code = event.code;
+        var clickctrl = event.ctrlKey
+        // Alert the key name and key code on keydown
+        if (clickctrl) {
+            // console.log(`Key DOWN ${name} \r\n Key code value: ${code}`);
+            var anchors = document.querySelectorAll("#searchclienttab");
+            for (var i = 0; i < anchors.length; i++) {
+                anchors[i].setAttribute('target', '_newone');
+            }
         }
-    }
-}, false);
+    }, false);
 
-const handleVisibilityChange = function() {
-    if (document.visibilityState != 'visible') {
-        var anchors = document.querySelectorAll("#searchclienttab");
-        for (var i = 0; i < anchors.length; i++) {
-            anchors[i].setAttribute('target', '_self');
+    const handleVisibilityChange = function() {
+        if (document.visibilityState != 'visible') {
+            var anchors = document.querySelectorAll("#searchclienttab");
+            for (var i = 0; i < anchors.length; i++) {
+                anchors[i].setAttribute('target', '_self');
+            }
         }
     }
-}
 </script>
