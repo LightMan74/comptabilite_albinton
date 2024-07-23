@@ -19,14 +19,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    if (isset($_POST['modifitem']) || isset($_POST['additem'])) {        
+    if (isset($_POST['modifitem']) || isset($_POST['additem'])) {
         if (isset($_POST['additem'])) {
             $sql .= "INSERT INTO `comptabilite` SET ";
         } else {
-            $sql .= "UPDATE `comptabilite` SET ";           
+            $sql .= "UPDATE `comptabilite` SET ";
         }
         if ($_POST["DATE_FACTURE"] != '') {
-            $sql .=  "`DATE_FACTURE`='".$_POST["DATE_FACTURE"]."',";
+            $splitdate = explode("-", $_POST["DATE_FACTURE"]);
+            $_POST["DATE_FACTURE"] =  $splitdate[2]."/".$splitdate[1]."/".$splitdate[0];
+        }
+        if ($_POST["DATE_PAYEMENT"] != '') {
+            $splitdate = explode("-", $_POST["DATE_PAYEMENT"]);
+            $_POST["DATE_PAYEMENT"] =  $splitdate[2]."/".$splitdate[1]."/".$splitdate[0];
         }
         if ($_POST["DEBIT"] != '') {
             $sql .=  "`DEBIT`='".strtolower($_POST["DEBIT"])."',";
@@ -38,16 +43,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $sql .=  "`CREDIT`=NULL,";
         }
-        $sql .=  "`TYPE`='".strtoupper($_POST["TYPE"])."',";        
+        $sql .=  "`TYPE`='".strtoupper($_POST["TYPE"])."',";
         if ($_POST["TTC"] != '') {
             $sql .=  "`TTC`='".$_POST["TTC"]."',";
         }
         $sql .=  "`CLIENTS_FOURNISEUR`='".strtoupper(str_replace("'", "\'", $_POST["CLIENT"]))."',";
         if ($_POST["REMARQUE"] != '') {
             $sql .=  "`REMARQUE_DIVERSE`='".strtoupper(str_replace("'", "\'", $_POST["REMARQUE"]))."',";
-        }
-        if ($_POST["DATE_PAYEMENT"] != '') {
-            $sql .=  "`DATE_PAYEMENT`='".str_replace("'", "\'", $_POST["DATE_PAYEMENT"])."',";
         }
         if ($_POST["CB"] != '') {
             $sql .=  "`CB`='".$_POST["CB"]."',";
@@ -109,18 +111,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ?>
 
 <script type="text/javascript">
-window.location.href = "liste.php";
+    window.location.href = "liste.php";
 </script>
 <?php
         exit();
     }
     ?>
 <?php
-       if ((isset($_POST['additem'])) || (isset($_POST['modifitem']))) {
-           $_SESSION['keepfiltre'] = true; ?>
+    if ((isset($_POST['additem'])) || (isset($_POST['modifitem']))) {
+        $_SESSION['keepfiltre'] = true; ?>
 
 <script type="text/javascript">
-window.location.href = "liste.php";
+    window.location.href = "liste.php";
 </script>
 <?php
     } else {
@@ -129,7 +131,7 @@ window.location.href = "liste.php";
 
 <?php
     if (isset($_POST['openmodifitem']) || (isset($_POST['openadditem']))) {
-        
+
         if (isset($_POST['openmodifitem'])) {
             $id = $_POST["ID"];
             $sql = "SELECT * FROM `comptabilite` WHERE `id` = $id";
@@ -160,7 +162,7 @@ window.location.href = "liste.php";
         ?>
 
 <script type="text/javascript">
-toogleForm('modif-popup');
+    toogleForm('modif-popup');
 </script>
 
 <?php
