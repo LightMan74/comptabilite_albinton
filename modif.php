@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         $sql .= "; ";
 
-        echo "\n".'<script>console.log("SQL out: ' . $sql . '"); </script>';
+        echo "\n".'<script>console.log("SQL out: '.$_POST["DATE_FACTURE"] . $sql . '"); </script>';
         if (mysqli_query(dbconnect, $sql)) {
             PopUpMsg("AJOUT/MODIF EFFECTUER.");
             echo "\n".'<script>console.log("SQL ok: ' . $sql . '"); </script>';
