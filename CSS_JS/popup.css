@@ -1,0 +1,58 @@
+
+
+/* The popup form - hidden by default */
+.add-popup_close {
+  display: none;
+}
+.add-popup_show {
+  display: block;
+/*   position: fixed;
+  bottom: 0;
+  right: 15px; */
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+  width:50%;
+      position:fixed;
+    left: 50%;
+    top: 50%;
+	height:95%;
+    -ms-transform: translate(-50%,-50%);
+    -moz-transform:translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+     transform: translate(-50%,-50%);
+}
+
+/* The popup form - hidden by default */
+.modif-popup_close {
+  display: none;
+}
+.modif-popup_show {
+  display: block;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+    width:50%;
+    position:fixed;
+    left: 50%;
+    top: 25%;/* 50%; */
+	height:95%;
+    -ms-transform: translate(-50%,-25%);
+    -moz-transform:translate(-50%,-25%);
+    -webkit-transform: translate(-50%,-25%);
+     transform: translate(-50%,-25%);
+}
+.del-popup_close {
+  display: none;
+}
+.del-popup_show {
+  display: block;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+    width:50%;
+      position:fixed;
+    left: 50%;
+    top: 50%;
+    -ms-transform: translate(-50%,-50%);
+    -moz-transform:translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+     transform: translate(-50%,-50%);
+}

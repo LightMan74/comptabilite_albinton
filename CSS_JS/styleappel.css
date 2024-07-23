@@ -1,0 +1,146 @@
+:root {
+    --color1: #0098ee;
+    --colorborder: #707d86;
+    /* #008000; */
+    --colorlink: #fff;
+    --colorlinkover: #fff;
+    --colorp: #000;
+    --colorfont: #000;
+}
+
+:focus {
+    opacity: 0.75;
+    background: rgb(145, 0, 189);
+    color: yellow;
+}
+
+body {
+    font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+    width: 100%;
+    height: 100%;
+    background-color: lightgray;
+    margin: auto;
+    font-size: 100%;
+}
+
+.modif-popup_close {
+    font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+    width: 60%;
+    height: 90%;
+    background-color: lightgray;
+    margin: auto;
+    margin-top: 0%;
+    font-size: 100%;
+    /* overflow-y: scroll;
+    overflow-x: scroll; */
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+th a {
+    display: block;
+    text-decoration: none;
+    color: var(--colorp);
+}
+
+tr td a {
+    display: block;
+    text-decoration: none;
+    color: var(--colorp);
+}
+
+.modifappel_description {
+    text-align: center;
+}
+
+.modifappel {
+    text-align: center;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 5vh;
+    font-size: 150%;
+    margin: auto;
+    text-align: center;
+}
+
+.modifappel textarea.form-control {
+    height: 15vh;
+    /*     text-align: center; */
+    font-size: 200%;
+}
+
+/* .modifappel select.form-control{
+    text-align: center;
+} */
+
+.modifappel label {
+    margin: 1%;
+}
+
+.buttons {
+    font-size: 100%;
+    /* 120%; */
+    margin-right: 5px;
+    width: 100%;
+}
+
+.buttons input {
+    font-size: 100%;
+    /* 120%; */
+    margin-right: 5px;
+    width: 100%;
+}
+
+
+
+
+.buttons .radio input {
+    font-size: inherit;
+    /* 120%; */
+    margin-right: inherit;
+    width: inherit;
+}
+
+.buttons.archive {
+    display: none;
+}
+
+.buttons.archive_show {
+    display: block;
+}
+
+
+
+@media (max-width: 1250px) {
+    body {
+        font-size: 50%;
+    }
+    .btn.btn-outline-danger.btncat {
+        display: grid;
+        width: 100%;
+        vertical-align: middle;
+        height: 6vh;
+        line-height: 6vh;
+        font-size: 150%;
+    }
+
+    .btn.btn-outline-danger.btnadd {
+        line-height: calc(6vh * 5 + 0.25vh * 4);
+    }
+
+    .btn.btn-outline-danger.btndeconnection {
+        line-height: calc(6vh * 5 + 0.25vh * 4);
+        font-size: 100%;
+    }
+
+    .tabcontents {
+        margin-top: 35vh;
+    }
+    .modif-popup_close {
+        width: 80%;
+        height: 90%;
+    }
+}

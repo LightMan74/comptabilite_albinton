@@ -1,0 +1,29 @@
+.box {
+	background-color: white;
+	outline: 2px dashed black;
+	height: 100px;
+}
+.box.is-dragover {
+	background-color: grey;
+}
+
+.box {
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.box label strong {
+	text-decoration: underline;
+	color: blue;
+	cursor: pointer;
+}
+
+.box label strong:hover {
+	color: blueviolet
+}
+
+.box input {
+	display: none;
+}

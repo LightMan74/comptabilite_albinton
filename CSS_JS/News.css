@@ -1,0 +1,120 @@
+﻿/* Tab Content - menucool.com */
+@media all
+{
+ul.tabs
+{
+    padding: 6px 0;
+    font-size: 0;
+    margin:0;
+    list-style-type: none;
+    text-align: center; /*set to left, center, or right to align the tabs as desired*/
+	opacity: 1;
+}
+        
+ul.tabs li
+{
+    display: inline-grid;
+    margin: 0;
+    margin-right:10px; /*distance between tabs*/
+}
+        
+ul.tabs li a
+{
+
+	position: relative;
+	max-height:auto;
+	font-family: helvetica, verdana, tahoma, arial;
+	text-transform: uppercase;
+	font-size: 1vw; /* 15px; */
+	margin-top: 0.5rem;
+    margin-right: 0.1rem;
+    margin-bottom: 0px;
+	color:var(--colorp);
+	background-color: var(--color1);
+	text-decoration:none;
+	border: 1px solid var(--colorborder);
+	padding: 9px 16px 6px;
+    background-color: var(--color1);
+    border-radius: 1px;
+}
+        
+        
+ul.tabs li a:hover
+{
+    border: 1px solid #313E47;
+    background:var(--colorborder);
+	color: #fff;
+}
+        
+ul.tabs li.selected a, ul.tabs li.selected a:hover
+{
+    padding: 9px 16px 6px;
+    position: relative;
+    top: 0px;
+    font-weight:bold;
+    background: var(--colorborder);
+    border: 1px solid #313E47;
+    border-bottom-color: #313E47;
+	color: #fff;
+}
+        
+        
+ul.tabs li.selected a:hover
+{
+    text-decoration: none;
+}
+/*  #contenu .tabcontents {
+	 position: relative;
+  top: 0%; left: auto; right: auto;
+  	 margin-top: 0%;
+  	margin-bottom: 3%;
+  	padding:10px 10px 10px 10px;
+    border: 2px solid var(--colorborder); padding: 30px;
+    background-color: var(--color1);
+    border-radius: 3px;
+	min-height: 25
+	min-width: 50%;
+	opacity: 0.9;
+ } */
+div.tabcontentsxx
+{
+    border: 1px solid #F8AF40; padding: 30px;
+    background-color:#313E47;
+    border-radius: 2px;
+	min-height:calc(450px - 87px);
+	opacity: 0.90;
+}
+}
+
+@media (max-width: 1300px) and (min-width: 850px)
+{
+	
+}
+
+@media (max-width: 850px)
+{
+
+	ul.tabs li {
+	display: grid;
+	margin: 0;
+    margin-right:0px; /*distance between tabs*/
+	}
+	
+	ul.tabs li a {
+    position: relative;
+    max-height: auto;
+    font-family: helvetica, verdana, tahoma, arial;
+    text-transform: uppercase;
+    font-size: 2.5vw;
+    margin-top: 0.5rem;
+    margin-right: 0.1rem;
+    margin-bottom: 0px;
+    color: var(--colorp);
+    background-color: var(--color1);
+    text-decoration: none;
+    border: 1px solid var(--colorborder);
+    padding: 9px 16px 6px;
+    background-color: var(--color1);
+    border-radius: 1px;
+}
+}
