@@ -1,10 +1,10 @@
 <?php
 
-
+// echo $_SERVER['SERVER_NAME'];
 if ($_SERVER['SERVER_NAME'] == "lansard.ch") {
     include "../../configuserlogin.php";
 }
-if ($_SERVER['SERVER_NAME'] == "albinton.fr") {
+if ($_SERVER['SERVER_NAME'] == "compta.albinton.fr") {
     include "configuserlogin.php";
 }
 define('DB_SERVER', bdserver);
