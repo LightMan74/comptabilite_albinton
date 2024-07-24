@@ -26,11 +26,12 @@
             session_start();
 
     include "config.php";
-
+    // var_dump($_SESSION);
     if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1' && (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] != true)) {
+        // exit;
         ?>
     <script type="text/javascript">
-        window.location.href = "login.php";
+    window.location.href = "login.php";
     </script>
     <?php
     }
@@ -132,11 +133,11 @@ if (isset($_POST['viewfilecompta'])) {
 
             if (isset($_GET['removefilter']) || $_SESSION["comptacheckpoint"] == '1') {
                 $_SESSION["comptacheckpoint"] = '2';
-                // echo "-->" . $_SESSION["comptacheckpoint"];
+                echo "-->" . $_SESSION["comptacheckpoint"];
                 // echo "<script>var filteratstart = [0, 1, 6, 15, 17, 18, 19, 20, 21, 22, 23, 25];</script>";
-                // echo "<script>var filteratstart = [0, 1, 3];</script>";
+                echo "<script>var filteratstart = [0, 1, 3, 12];</script>";
 
-                echo "<script>var filteratstart = '';</script>";
+                // echo "<script>var filteratstart = '';</script>";
             } else {
                 echo "<script>var filteratstart = '';</script>";
             }

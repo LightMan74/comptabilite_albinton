@@ -58,20 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($_POST["DATE_PAYEMENT"] != '') {
             $sql .=  "`DATE_PAYEMENT`='".str_replace("'", "\'", $_POST["DATE_PAYEMENT"])."',";
         }
-        if ($_POST["CB"] != '') {
-            $sql .=  "`CB`='".$_POST["CB"]."',";
-        } else {
-            $sql .=  "`CB`='0.00',";
-        }
         if ($_POST["VIR"] != '') {
             $sql .=  "`VIR`='".$_POST["VIR"]."',";
         } else {
             $sql .=  "`VIR`='0.00',";
-        }
-        if ($_POST["ESP"] != '') {
-            $sql .=  "`ESP`='".$_POST["ESP"]."',";
-        } else {
-            $sql .=  "`ESP`='0.00',";
         }
         if ($_POST["IDMOIS"] != '') {
             $sql .=  "`IDMOIS`='".$_POST["IDMOIS"]."',";
@@ -80,6 +70,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql .= "`CREATE_TIMESTAMP`='".$_POST["CREATE_TIMESTAMP"]."',";
         } else {
             $sql .=  "`CREATE_TIMESTAMP`='".date("Y-m-d H:i:s")."',";
+        }
+        if ($_POST["ISERROR"] != '') {
+            $sql .=  "`ISERROR`='".$_POST["ISERROR"]."',";
         }
         $sql = rtrim($sql, ",");
         if (isset($_POST['modifitem'])) {

@@ -85,6 +85,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                                 $_SESSION["id"] = $id;
                                 $_SESSION["username"] = $username;
                                 setcookie('ALB_CONNECT_USERNAME', $username, time() + 1 * 12 * 3600, '/', '.albinton.fr', true, false);
+
+                                // var_dump($_SESSION);
+                                // exit;
                                 header('location: liste.php');
                                 exit;
                             } else {
@@ -126,14 +129,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>ALB'INTON</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
-    body {
-        font: 14px sans-serif;
-    }
+        body {
+            font: 14px sans-serif;
+        }
 
-    .wrapper {
-        width: 500px;
-        padding: 20px;
-    }
+        .wrapper {
+            width: 500px;
+            padding: 20px;
+        }
     </style>
 </head>
 

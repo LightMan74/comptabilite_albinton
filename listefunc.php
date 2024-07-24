@@ -1,28 +1,28 @@
 <script>
-    const isMobile = {
-        Android: function() {
-            return navigator.userAgent.match(/Android/i);
-        },
-        BlackBerry: function() {
-            return navigator.userAgent.match(/BlackBerry/i);
-        },
-        iOS: function() {
-            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-        },
-        Opera: function() {
-            return navigator.userAgent.match(/Opera Mini/i);
-        },
-        Windows: function() {
-            return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
-        },
-        any: function() {
-            if (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()) {
-                return '_blank';
-            } else {
-                return '_compta';
-            }
+const isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
+    },
+    any: function() {
+        if (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()) {
+            return '_blank';
+        } else {
+            return '_compta';
         }
-    };
+    }
+};
 </script>
 
 <?php
@@ -129,8 +129,9 @@ function loadpieces()
         <th style="width:6%">timestamp</th>
         <th style="width:6%">DATE_FACTURE</th>
         <th style="width:6%;font-size:85%">IDMOIS</th>
-        <th style="width:6%;font-size:75%">DEBIT</th>
-        <th style="width:6%;font-size:75%">CREDIT</th>
+        <!-- <th style="width:6%;font-size:75%">DEBIT</th> -->
+        <!-- <th style="width:6%;font-size:75%">CREDIT</th> -->
+        <th style="width:6%">CorD</th>
         <th style="width:6%">TYPE</th>
         <th style="width:6%">TTC</th>
         <th style="width:15%;font-size:85%">CLIENTS_FOURNISEUR</th>
@@ -138,13 +139,14 @@ function loadpieces()
         <th style="width:3%">DATE_PAYEMENT</th>
         <th style="width:6%">MONTANT</th>
         <th style="width:12%">OPTIONS</th>
+        <th style="width:12%">ERREUR</th>
     </tr>
 </thead>
 <tbody>
     <script>
-        function sendform(sendform) {
-            document.getElementById(sendform).submit();
-        }
+    function sendform(sendform) {
+        document.getElementById(sendform).submit();
+    }
     </script>
     <?php
 
@@ -157,8 +159,16 @@ function loadpieces()
 
             echo "<td>" . $row["DATE_FACTURE"] . "</td>";
             echo "<td style='font-size:85%'>" . $row["IDMOIS"] . "</td>";
-            echo "<td style='font-size:75%'>" . $row["DEBIT"] . "</td>";
-            echo "<td style='font-size:75%'>" . $row["CREDIT"] . "</td>";
+            // echo "<td style='font-size:75%'>" . $row["DEBIT"] . "</td>";
+            // echo "<td style='font-size:75%'>" . $row["CREDIT"] . "</td>";
+            echo "<td style='font-size:75%'>";
+            if ($row["CREDIT"] <> "") {
+                echo "CREDIT";
+            }
+            if ($row["DEBIT"] <> "") {
+                echo "DEBIT";
+            }
+            echo "</td>";
             echo "<td>" . $row["TYPE"] . "</td>";
             echo "<td>" . number_format($row["TTC"], 2, ".", "") . "</td>";
             echo "<td style='font-size:85%'>" . $row["CLIENTS_FOURNISEUR"] . "</td>";
@@ -171,9 +181,9 @@ function loadpieces()
             echo "</td>";
             ?>
     <script>
-        $(function() {
-            $("#<?php echo $row["N_FACTURE"].$row["id"] ?>").attr('target', isMobile.any());
-        });
+    $(function() {
+        $("#<?php echo $row["N_FACTURE"].$row["id"] ?>").attr('target', isMobile.any());
+    });
     </script>
 
     <?php
@@ -193,7 +203,9 @@ function loadpieces()
     </div>
     <?php
                echo "</td>";
+               echo "<td>" . $row["ISERROR"] . "</td>";
             ?>
+
     </tr>
     <?php
 
@@ -206,8 +218,9 @@ function loadpieces()
         <th>timestamp</th>
         <th>DATE_FACTURE</th>
         <th>IDMOIS</th>
-        <th>DEBIT</th>
-        <th>CREDIT</th>
+        <!-- <th>DEBIT</th>
+        <th>CREDIT</th> -->
+        <th>CorD</th>
         <th>TYPE</th>
         <th>TTC</th>
         <th>CLIENTS_FOURNISEUR</th>
@@ -215,6 +228,7 @@ function loadpieces()
         <th>DATE_PAYEMENT</th>
         <th>MONTANT</th>
         <th>OPTIONS</th>
+        <th>ERREUR</th>
     </tr>
 </tfoot>
 
@@ -229,26 +243,26 @@ function loadpieces()
 ?>
 
 <script>
-    document.addEventListener('click', function(event) {
-        var name = event.key;
-        var code = event.code;
-        var clickctrl = event.ctrlKey
-        // Alert the key name and key code on keydown
-        if (clickctrl) {
-            // console.log(`Key DOWN ${name} \r\n Key code value: ${code}`);
-            var anchors = document.querySelectorAll("#searchclienttab");
-            for (var i = 0; i < anchors.length; i++) {
-                anchors[i].setAttribute('target', '_newone');
-            }
-        }
-    }, false);
-
-    const handleVisibilityChange = function() {
-        if (document.visibilityState != 'visible') {
-            var anchors = document.querySelectorAll("#searchclienttab");
-            for (var i = 0; i < anchors.length; i++) {
-                anchors[i].setAttribute('target', '_self');
-            }
+document.addEventListener('click', function(event) {
+    var name = event.key;
+    var code = event.code;
+    var clickctrl = event.ctrlKey
+    // Alert the key name and key code on keydown
+    if (clickctrl) {
+        // console.log(`Key DOWN ${name} \r\n Key code value: ${code}`);
+        var anchors = document.querySelectorAll("#searchclienttab");
+        for (var i = 0; i < anchors.length; i++) {
+            anchors[i].setAttribute('target', '_newone');
         }
     }
+}, false);
+
+const handleVisibilityChange = function() {
+    if (document.visibilityState != 'visible') {
+        var anchors = document.querySelectorAll("#searchclienttab");
+        for (var i = 0; i < anchors.length; i++) {
+            anchors[i].setAttribute('target', '_self');
+        }
+    }
+}
 </script>
