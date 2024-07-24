@@ -30,7 +30,7 @@
     if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1' && (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] != true)) {
         ?>
     <script type="text/javascript">
-    window.location.href = "login.php";
+        window.location.href = "login.php";
     </script>
     <?php
     }

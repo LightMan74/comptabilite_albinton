@@ -1,8 +1,22 @@
+<?php
+include "settings.php"
+?>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- <link href="CSS_JS/select2.css" rel="stylesheet" /> -->
 <!-- <script src="CSS_JS/select2.js"></script> -->
 <link href="CSS_JS/dragdrop.css" rel="stylesheet" />
-
+<script>
+    function energiechange(cb, el) {
+        var combo = document.getElementById(cb);
+        var element = document.getElementById(el);
+        if (combo.value == "AUTRE") {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+        element.value = combo.value;
+    }
+</script>
 <script type="text/javascript">
     function setRequired(element) {
         if (element == "DEBIT") {
@@ -35,7 +49,7 @@
                 <tr>
                     <th>
                         DATE FACTURE<br><input type="date" style="width:100%;height: 3vh;text-align: center;" type="text" class="form-control date" name="DATE_FACTURE" value="<?php $splitdate = explode("/", $row['DATE_FACTURE']);
-        echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de facture" required="required">
+echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de facture" required="required">
                     </th>
                 </tr>
             </table>
@@ -57,7 +71,19 @@
             </table>
             <table id="aze" class="blueTable tablenoFixHead">
                 <tr>
-                    <th>TYPE<br><input style="width:100%;height: 3vh;text-align: center;" class="form-control" type="text" name="TYPE" placeholder="TYPE" value="<?php echo $row['TYPE'];?>" autocomplete="off">
+                    <th>TYPE<br>
+                        <!-- <input style="width:100%;height: 3vh;text-align: center;" class="form-control" type="text" name="TYPE" placeholder="TYPE" value="<?php echo $row['TYPE'];?>" autocomplete="off"> -->
+                        <select name="type0" id="cbtype" onchange="energiechange('cbtype','autretype')">
+                            <option value="<?php echo $row["TYPE"] ?>" selected><?php echo $row["TYPE"] ?></option>
+                            <?php
+                        foreach ($setting_type as $it) {
+                            echo '<option value="'.$it.'">'.$it.'</option>';
+                        } ?>
+                            <option value=""></option>
+                            <option value="AUTRE">AUTRE</option>
+                        </select>
+                        <input name="type" id="autretype" value="<?php echo $row["TYPE"] ?>" style="display:none;" />
+                    </th>
                     </th>
                 </tr>
             </table>
@@ -110,8 +136,8 @@
                         <!-- </form> -->
                         <?php
                     require 'readfile.php';
-        readfileform($row["id"]);
-        ?>
+readfileform($row["id"]);
+?>
                     </th>
                 </tr>
             </table>
@@ -134,7 +160,7 @@
                 <tr>
                     <th>
                         DATE PAYEMENT<br><input type="date" style="width:100%;height: 3vh;text-align: center;" type="text" class="form-control date" name="DATE_PAYEMENT" value="<?php $splitdate = explode("/", $row['DATE_FACTURE']);
-        echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de payement">
+echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de payement">
                     </th>
                 </tr>
                 <br>
