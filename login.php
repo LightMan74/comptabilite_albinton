@@ -126,14 +126,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>ALB'INTON</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
-        body {
-            font: 14px sans-serif;
-        }
+    body {
+        font: 14px sans-serif;
+    }
 
-        .wrapper {
-            width: 500px;
-            padding: 20px;
-        }
+    .wrapper {
+        width: 500px;
+        padding: 20px;
+    }
     </style>
 </head>
 
@@ -144,7 +144,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2>Connexion</h2>
         <p>Veuillez remplir vos identifiants pour vous connecter.</p>
         <!-- <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"> -->
-        <form action="https://compta.albinton.fr/login.php" method="post">
+        <form action="login.php" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Nom d'utillisateur</label>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
@@ -171,6 +171,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php
 $ipaddress = $_SERVER['REMOTE_ADDR'];
 echo "Your IP Address is " . $ipaddress;
+echo "<br>Your SERVER_NAME is " . $_SERVER['SERVER_NAME'];
 ?>
 
 </body>

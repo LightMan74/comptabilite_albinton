@@ -1,5 +1,10 @@
 <?php
 
-define('DB_NAME', 'albin549889');
+if ($_SERVER['SERVER_NAME'] == "lansard.ch") {
+    define('DB_NAME', 'albinton');
+}
+if ($_SERVER['SERVER_NAME'] == "albinton.fr") {
+    define('DB_NAME', 'albin549889');
+}
 
 include "configsql.php";

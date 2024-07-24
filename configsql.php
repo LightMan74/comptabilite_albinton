@@ -1,7 +1,12 @@
 <?php
 
-include "configuserlogin.php";
 
+if ($_SERVER['SERVER_NAME'] == "lansard.ch") {
+    include "../../configuserlogin.php";
+}
+if ($_SERVER['SERVER_NAME'] == "albinton.fr") {
+    include "configuserlogin.php";
+}
 define('DB_SERVER', bdserver);
 define('DB_USERNAME', bduser);
 define('DB_PASSWORD', bdpassword);
