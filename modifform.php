@@ -6,32 +6,32 @@ include "settings.php"
 <!-- <script src="CSS_JS/select2.js"></script> -->
 <link href="CSS_JS/dragdrop.css" rel="stylesheet" />
 <script>
-    function energiechange(cb, el) {
-        var combo = document.getElementById(cb);
-        var element = document.getElementById(el);
-        if (combo.value == "AUTRE") {
-            element.style.display = "block";
-        } else {
-            element.style.display = "none";
-        }
-        element.value = combo.value;
+function energiechange(cb, el) {
+    var combo = document.getElementById(cb);
+    var element = document.getElementById(el);
+    if (combo.value == "AUTRE") {
+        element.style.display = "block";
+    } else {
+        element.style.display = "none";
     }
+    element.value = combo.value;
+}
 </script>
 <script type="text/javascript">
-    function setRequired(element) {
-        if (element == "DEBIT") {
-            document.getElementById("DEBIT").required = true;
-            document.getElementById("CREDIT").required = false;
-            document.getElementById("DEBIT").checked = true;
-            document.getElementById("CREDIT").checked = false;
-        }
-        if (element == "CREDIT") {
-            document.getElementById("DEBIT").required = false;
-            document.getElementById("CREDIT").required = true;
-            document.getElementById("DEBIT").checked = false;
-            document.getElementById("CREDIT").checked = true;
-        }
+function setRequired(element) {
+    if (element == "DEBIT") {
+        document.getElementById("DEBIT").required = true;
+        document.getElementById("CREDIT").required = false;
+        document.getElementById("DEBIT").checked = true;
+        document.getElementById("CREDIT").checked = false;
     }
+    if (element == "CREDIT") {
+        document.getElementById("DEBIT").required = false;
+        document.getElementById("CREDIT").required = true;
+        document.getElementById("DEBIT").checked = false;
+        document.getElementById("CREDIT").checked = true;
+    }
+}
 </script>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -90,27 +90,27 @@ echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de 
 
             <br>
             <script>
-                function validateNumber(event) {
-                    var key = window.event ? event.keyCode : event.which;
-                    if (event.keyCode === 8 || event.keyCode === 46 || event.key === '-') {
-                        return true;
-                    } else if (key < 48 || key > 57) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                };
-
-                function energiechange(cb, el) {
-                    var combo = document.getElementById(cb);
-                    var element = document.getElementById(el);
-                    if (combo.value == "AUTRE") {
-                        element.style.display = "block";
-                    } else {
-                        element.style.display = "none";
-                    }
-                    element.value = combo.value;
+            function validateNumber(event) {
+                var key = window.event ? event.keyCode : event.which;
+                if (event.keyCode === 8 || event.keyCode === 46 || event.key === '-') {
+                    return true;
+                } else if (key < 48 || key > 57) {
+                    return false;
+                } else {
+                    return true;
                 }
+            };
+
+            function energiechange(cb, el) {
+                var combo = document.getElementById(cb);
+                var element = document.getElementById(el);
+                if (combo.value == "AUTRE") {
+                    element.style.display = "block";
+                } else {
+                    element.style.display = "none";
+                }
+                element.value = combo.value;
+            }
             </script>
 
 
@@ -159,7 +159,7 @@ readfileform($row["id"]);
             <table id="aze" class="blueTable tablenoFixHead">
                 <tr>
                     <th>
-                        DATE PAYEMENT<br><input type="date" style="width:100%;height: 3vh;text-align: center;" type="text" class="form-control date" name="DATE_PAYEMENT" value="<?php $splitdate = explode("/", $row['DATE_FACTURE']);
+                        DATE PAYEMENT<br><input type="date" style="width:100%;height: 3vh;text-align: center;" type="text" class="form-control date" name="DATE_PAYEMENT" value="<?php $splitdate = explode("/", $row['DATE_PAYEMENT']);
 echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de payement">
                     </th>
                 </tr>

@@ -81,24 +81,14 @@ function loadpieces()
     $wherecondition . " " . "ORDER BY create_timestamp DESC"
      . ", cast(concat(SUBSTR(`DATE_FACTURE`, 7, 4), SUBSTR(`DATE_FACTURE`, 4, 2), SUBSTR(`DATE_FACTURE`, 1, 2)) as unsigned) DESC";
     $sql = "SELECT * FROM `comptabilite` WHERE `id` <> '1' AND  " . $wherecondition;
-    // $sql2 = "SELECT (
-    //     (SELECT sum(`CB`) FROM `comptabilite` WHERE `CREDIT` IS NOT NULL)+
-    //     (SELECT sum(`ESP`) FROM `comptabilite` WHERE `CREDIT` IS NOT NULL))-
-    //     (SELECT sum(`VIR`) FROM `comptabilite` WHERE `DEBIT` IS NOT NULL)+
-    //     (SELECT sum(`VIR`) FROM `comptabilite` WHERE `CREDIT` IS NOT NULL) as compte_reel,
-    //     ((SELECT sum(`CB`) FROM `comptabilite` WHERE `DEBIT` IS NOT NULL)+
-    //      (SELECT sum(`ESP`) FROM `comptabilite` WHERE `DEBIT` IS NOT NULL)) as compte_rbs,
-    //      ((SELECT sum(`CB`) FROM `comptabilite` WHERE `CREDIT` IS NOT NULL)+
-    //       (SELECT sum(`ESP`) FROM `comptabilite` WHERE `CREDIT` IS NOT NULL))-
-    //       (SELECT sum(`VIR`) FROM `comptabilite` WHERE `DEBIT` IS NOT NULL)+
-    //       (SELECT sum(`VIR`) FROM `comptabilite` WHERE `CREDIT` IS NOT NULL)-
-    //       ((SELECT sum(`CB`) FROM `comptabilite` WHERE `DEBIT` IS NOT NULL)+
-    //        (SELECT sum(`ESP`) FROM `comptabilite` WHERE `DEBIT` IS NOT NULL)-
-    //        (IF((SELECT sum(`TTC`) FROM `comptabilite` WHERE `DEBIT` is not null and TTC <> (`CB`+`VIR`+`ESP`) and `ISERROR` <> 1)>0,
-    //            -((SELECT sum(`TTC`) FROM `comptabilite` WHERE `DEBIT` is not null and TTC <> (`CB`+`VIR`+`ESP`) and `ISERROR` <> 1)),
-    //            0))) as compte_after_rbs";
+    $sql2 = "SELECT 
+    1500.00-
+    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` is not null),0)-
+    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` is not null),0) as compte_reel,
+    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` is null),0) as credit, 
+    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` is null),0) as debit;";
     // SELECT * FROM `comptabilite` WHERE `DEBIT` is not null and TTC <> (`CB`+`VIR`+`ESP`) and `ISERROR` <> 1;
-    $sql2 = "SELECT ''";
+    // $sql2 = "SELECT ''";
     $result2 = mysqli_query(dbconnect, $sql2);
     // echo $sql . " " . "<br>". 'PAGE: <span id="T-T_HT-PAGE"></span> / ALL: <span id="T-T_HT-ALL"></span>';
     echo '<div style="font-size:75%">'.$sql . "</div>" . '<br>';
@@ -108,8 +98,9 @@ function loadpieces()
     if (mysqli_num_rows($result2) > 0) {
         while ($row = mysqli_fetch_assoc($result2)) {
             echo '<br>COMPTE COURANT --> <span id="COMPTE_COURANT">'.$row["compte_reel"].'</span> €';
-            echo ' --- A PAYER --> <span id="COMPTE_COURANT_APAYER">'.sprintf('%0.2f', (($row["compte_reel"] - $row["compte_after_rbs"]) - $row["compte_rbs"])).'</span> €';
-            echo ' --- COMPTE COURANT APRES RBS ET PAYEMENT --> <span id="COMPTE_COURANT_REEL">'.$row["compte_after_rbs"].'</span> €';
+            echo ' --- A PAYER --> <span id="COMPTE_COURANT_APAYER">'.$row["debit"].'</span> €';
+            echo ' --- A RENTRER --> <span id="COMPTE_COURANT_APAYER">'.$row["credit"].'</span> €';
+            echo ' --- COMPTE COURANT APRES RBS ET PAYEMENT --> <span id="COMPTE_COURANT_REEL">'.sprintf('%0.2f', (($row["compte_reel"] - $row["debit"]) + $row["credit"])).'</span> €';
         }
     }
     $sqlogs = 'INSERT INTO `logs_compta` (`user`, `action`) VALUES ("' . $_SESSION["username"] . '","' . $sql . '")';
@@ -203,7 +194,7 @@ function loadpieces()
     </div>
     <?php
                echo "</td>";
-               echo "<td>" . $row["ISERROR"] . "</td>";
+            echo "<td>" . $row["ISERROR"] . "</td>";
             ?>
 
     </tr>
