@@ -16,14 +16,18 @@
     ?>
     <?php
     error_reporting(E_ERROR | E_PARSE);
+    // error_reporting(E_ALL);
     ini_set('display_errors', 1);?>
 
     <script type="text/javascript" src="CSS_JS/popup.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="logo.ico">
     <title>COMPTA</title>
     <?php
             session_start();
+
+    var_dump($_POST['TYPE']);
 
     include "config.php";
     // var_dump($_SESSION);
@@ -31,7 +35,7 @@
         // exit;
         ?>
     <script type="text/javascript">
-    window.location.href = "login.php";
+        window.location.href = "login.php";
     </script>
     <?php
     }
@@ -50,7 +54,7 @@
         }
     }
     if (!isset($_POST['modifitem']) && !isset($_POST['additem'])) {
-        getUpperPost();
+        // getUpperPost();
     }
     function dtc($data)
     {
@@ -68,15 +72,19 @@
                 <th colspan="8">
                     <div class="nav-fullscreen">
                         <ul class="nav-fullscreen__items">
-                            <!-- <input class="btn btn-outline-danger btncat" value="VOIR EXPORT COMPTABLE" onclick="window.open('', '_blank');" />
+                            <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post" style="margin: 0;">
+                                <!-- <input class="btn btn-outline-danger btncat" value="VOIR EXPORT COMPTABLE" onclick="window.open('', '_blank');" />
                             <br>
                             <input class="btn btn-outline-danger btncat" value="GENERER EXPORT COMPTABLE" onclick="window.open('', '_blank');" /> -->
-                            <br>
-                            <br>
-                            <?php echo 'Utillisateur : ' . htmlspecialchars($_SESSION["username"]); ?>
-                            <a href="../logout.php"><input class="btn btn-outline-danger btncat" value="DECONNEXION"></a>
+                                <br>
+                                <input class="btn btn-outline-danger btncat" type="submit" name="config" value="CONFIG" />
+                                <br>
+                                <br>
+                                <?php echo 'Utillisateur : ' . htmlspecialchars($_SESSION["username"]); ?>
+                                <a href="../logout.php"><input class="btn btn-outline-danger btncat" value="DECONNEXION"></a>
                         </ul>
 
+                        </form>
                     </div>
                     <div class="hamburger">
                         <center>
@@ -128,23 +136,31 @@ if (isset($_POST['viewfilecompta'])) {
         <?php
 
 // echo "-->" . $_SESSION["comptacheckpoint"];
-        if (!isset($_POST['openadditem']) && !isset($_POST['viewfilecompta']) && !isset($_POST['openmodifitem']) && !isset($_POST['modifitem']) && !isset($_POST['additem'])) {
-            loadpieces();
+if (isset($_POST['config'])) {
+    // echo "here1";
+    include "configpage.php";
+    // echo "here2";
+    modifconfig();
+} elseif (isset($_POST['configmodif'])) {
+    include "configpage.php";
+    modifconfigupdate();
+} elseif (!isset($_POST['openadditem']) && !isset($_POST['viewfilecompta']) && !isset($_POST['openmodifitem']) && !isset($_POST['modifitem']) && !isset($_POST['additem'])) {
+    loadpieces();
 
-            if (isset($_GET['removefilter']) || $_SESSION["comptacheckpoint"] == '1') {
-                $_SESSION["comptacheckpoint"] = '2';
-                echo "-->" . $_SESSION["comptacheckpoint"];
-                // echo "<script>var filteratstart = [0, 1, 6, 15, 17, 18, 19, 20, 21, 22, 23, 25];</script>";
-                echo "<script>var filteratstart = [0, 1, 3, 12];</script>";
+    if (isset($_GET['removefilter']) || $_SESSION["comptacheckpoint"] == '1') {
+        $_SESSION["comptacheckpoint"] = '2';
+        echo "-->" . $_SESSION["comptacheckpoint"];
+        // echo "<script>var filteratstart = [0, 1, 6, 15, 17, 18, 19, 20, 21, 22, 23, 25];</script>";
+        echo "<script>var filteratstart = [0, 1, 3, 12];</script>";
 
-                // echo "<script>var filteratstart = '';</script>";
-            } else {
-                echo "<script>var filteratstart = '';</script>";
-            }
-            // echo '<script src="CSS_JS/clipboard.min.js"></script>';
-            echo '<script src="CSS_JS/tablefilter/tablefilter.js"></script>';
-            echo '<script type="text/javascript" src="parametretableau.js"></script>';
-        }
+        // echo "<script>var filteratstart = '';</script>";
+    } else {
+        echo "<script>var filteratstart = '';</script>";
+    }
+    // echo '<script src="CSS_JS/clipboard.min.js"></script>';
+    echo '<script src="CSS_JS/tablefilter/tablefilter.js"></script>';
+    echo '<script type="text/javascript" src="parametretableau.js"></script>';
+}
     ?>
     </table>
     <div class="modif-popup_close" id="modif-popup">
