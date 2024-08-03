@@ -114,32 +114,34 @@ function loadpieces()
         $result = mysqli_query(dbconnect, $sql);
 
         ?>
-<thead>
-    <tr>
-        <th style="width:6%">id</th>
-        <th style="width:6%">timestamp</th>
-        <th style="width:6%">DATE_FACTURE</th>
-        <th style="width:6%;font-size:85%">IDMOIS</th>
-        <!-- <th style="width:6%;font-size:75%">DEBIT</th> -->
-        <!-- <th style="width:6%;font-size:75%">CREDIT</th> -->
-        <th style="width:6%">CorD</th>
-        <th style="width:6%">TYPE</th>
-        <th style="width:6%">TTC</th>
-        <th style="width:15%;font-size:85%">CLIENTS_FOURNISEUR</th>
-        <th style="width:15%">REMARQUES_DIVERSES</th>
-        <th style="width:3%">DATE_PAYEMENT</th>
-        <th style="width:6%">MONTANT</th>
-        <th style="width:12%">OPTIONS</th>
-        <th style="width:12%">ERREUR</th>
-    </tr>
-</thead>
-<tbody>
-    <script>
-    function sendform(sendform) {
-        document.getElementById(sendform).submit();
-    }
-    </script>
-    <?php
+
+<table id="searchtable" class="blueTable tableFixHead">
+    <thead>
+        <tr>
+            <th style="width:6%">id</th>
+            <th style="width:6%">timestamp</th>
+            <th style="width:6%">DATE_FACTURE</th>
+            <th style="width:6%;font-size:85%">IDMOIS</th>
+            <!-- <th style="width:6%;font-size:75%">DEBIT</th> -->
+            <!-- <th style="width:6%;font-size:75%">CREDIT</th> -->
+            <th style="width:6%">CorD</th>
+            <th style="width:6%">TYPE</th>
+            <th style="width:6%">TTC</th>
+            <th style="width:15%;font-size:85%">CLIENTS_FOURNISEUR</th>
+            <th style="width:15%">REMARQUES_DIVERSES</th>
+            <th style="width:3%">DATE_PAYEMENT</th>
+            <th style="width:6%">MONTANT</th>
+            <th style="width:12%">OPTIONS</th>
+            <th style="width:12%">ERREUR</th>
+        </tr>
+    </thead>
+    <tbody>
+        <script>
+        function sendform(sendform) {
+            document.getElementById(sendform).submit();
+        }
+        </script>
+        <?php
 
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
@@ -171,58 +173,59 @@ function loadpieces()
             }
             echo "</td>";
             ?>
-    <script>
-    $(function() {
-        $("#<?php echo $row["N_FACTURE"].$row["id"] ?>").attr('target', isMobile.any());
-    });
-    </script>
+        <script>
+        $(function() {
+            $("#<?php echo $row["N_FACTURE"].$row["id"] ?>").attr('target', isMobile.any());
+        });
+        </script>
 
-    <?php
+        <?php
 
                        echo "<td>"; ?>
-    <div style="height: 75%;">
-        <form id="searchclienttab" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post">
-            <input name="ID" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" style="display:none" />
-            <input class="btn menu btn-warning" type="submit" name="openmodifitem" value="MODIFER" style="height: 90%;" />
-        </form>
-    </div>
-    <div style="height: 25%;">
-        <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post">
-            <input name="ID" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" style="display:none" />
-            <input class="btn menu btn-danger" type="submit" name="confitem" value="SUPPRIMER" style="height: 90%;" />
-        </form>
-    </div>
-    <?php
+        <div style="height: 75%;">
+            <form id="searchclienttab" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post">
+                <input name="ID" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" style="display:none" />
+                <input class="btn menu btn-warning" type="submit" name="openmodifitem" value="MODIFER" style="height: 90%;" />
+            </form>
+        </div>
+        <div style="height: 25%;">
+            <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post">
+                <input name="ID" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" style="display:none" />
+                <input class="btn menu btn-danger" type="submit" name="confitem" value="SUPPRIMER" style="height: 90%;" />
+            </form>
+        </div>
+        <?php
                echo "</td>";
             echo "<td>" . $row["ISERROR"] . "</td>";
             ?>
 
-    </tr>
-    <?php
+        </tr>
+        <?php
 
         } ?>
 
-</tbody>
-<tfoot id="footer">
-    <tr>
-        <th>id</th>
-        <th>timestamp</th>
-        <th>DATE_FACTURE</th>
-        <th>IDMOIS</th>
-        <!-- <th>DEBIT</th>
+    </tbody>
+    <tfoot id="footer">
+        <tr>
+            <th>id</th>
+            <th>timestamp</th>
+            <th>DATE_FACTURE</th>
+            <th>IDMOIS</th>
+            <!-- <th>DEBIT</th>
         <th>CREDIT</th> -->
-        <th>CorD</th>
-        <th>TYPE</th>
-        <th>TTC</th>
-        <th>CLIENTS_FOURNISEUR</th>
-        <th>REMARQUES_DIVERSES</th>
-        <th>DATE_PAYEMENT</th>
-        <th>MONTANT</th>
-        <th>OPTIONS</th>
-        <th>ERREUR</th>
-    </tr>
-</tfoot>
+            <th>CorD</th>
+            <th>TYPE</th>
+            <th>TTC</th>
+            <th>CLIENTS_FOURNISEUR</th>
+            <th>REMARQUES_DIVERSES</th>
+            <th>DATE_PAYEMENT</th>
+            <th>MONTANT</th>
+            <th>OPTIONS</th>
+            <th>ERREUR</th>
+        </tr>
+    </tfoot>
 
+</table>
 <?php
     } else {
         echo "</br>";

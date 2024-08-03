@@ -20,14 +20,14 @@
     ini_set('display_errors', 1);?>
 
     <script type="text/javascript" src="CSS_JS/popup.js"></script>
-    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script> -->
     <link rel="icon" type="image/png" sizes="32x32" href="logo.ico">
     <title>COMPTA</title>
     <?php
             session_start();
 
-    var_dump($_POST['TYPE']);
+    // var_dump($_POST);
 
     include "config.php";
     // var_dump($_SESSION);
@@ -35,10 +35,12 @@
         // exit;
         ?>
     <script type="text/javascript">
-        window.location.href = "login.php";
+    window.location.href = "login.php";
     </script>
     <?php
     }
+
+
 
     function getUpperPost($keepVar = true)
     {
@@ -69,22 +71,18 @@
     <table id="123" class="blueTable tablenoFixHead" style="width: 100%;">
         <thead>
             <tr>
-                <th colspan="8">
+                <th colspan="11">
                     <div class="nav-fullscreen">
                         <ul class="nav-fullscreen__items">
                             <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post" style="margin: 0;">
-                                <!-- <input class="btn btn-outline-danger btncat" value="VOIR EXPORT COMPTABLE" onclick="window.open('', '_blank');" />
-                            <br>
-                            <input class="btn btn-outline-danger btncat" value="GENERER EXPORT COMPTABLE" onclick="window.open('', '_blank');" /> -->
                                 <br>
                                 <input class="btn btn-outline-danger btncat" type="submit" name="config" value="CONFIG" />
                                 <br>
                                 <br>
                                 <?php echo 'Utillisateur : ' . htmlspecialchars($_SESSION["username"]); ?>
                                 <a href="../logout.php"><input class="btn btn-outline-danger btncat" value="DECONNEXION"></a>
+                            </form>
                         </ul>
-
-                        </form>
                     </div>
                     <div class="hamburger">
                         <center>
@@ -120,6 +118,9 @@
 
                 </form>
             </tr>
+        </thead>
+        <tbody>
+        </tbody>
     </table>
 
 
@@ -127,13 +128,13 @@
 
 
     <?php
+
 if (isset($_POST['viewfilecompta'])) {
     include "viewfilecompta.php";
 }?>
 
     <div id="externalToolbar"></div>
-    <table id="searchtable" class="blueTable tableFixHead">
-        <?php
+    <?php
 
 // echo "-->" . $_SESSION["comptacheckpoint"];
 if (isset($_POST['config'])) {
@@ -162,7 +163,6 @@ if (isset($_POST['config'])) {
     echo '<script type="text/javascript" src="parametretableau.js"></script>';
 }
     ?>
-    </table>
     <div class="modif-popup_close" id="modif-popup">
 
         <?php
