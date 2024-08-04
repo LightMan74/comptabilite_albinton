@@ -47,14 +47,12 @@ function Row($data)
     // }  
     foreach($this->aCols as $col){
         if (!array_key_exists("MorA", $data)){
-            if($data['ISERROR']==2||($data['comptenull']==1 && $col['f'] == 'COMPTE')||($data['compte_enull']==1 && $col['f'] == 'COMPTE_E')||($data['idmoiserror']==1 && $col['f'] == 'IDMOIS')){
+            if($data['ISERROR']==2){
                 $this->SetFillColor(255,50,50);
-            }elseif($data['totalpayementup']==1 && ($col['f'] == 'CLIENTS_FOURNISEUR'||$col['f'] == 'T_TTC')||($data['totalpayementup']==1 && ($col['f'] == 'DATE_PAYEMENT'||$col['f'] == 'REMARQUE_DIVERSE'||$col['f'] == 'CB'||$col['f'] == 'VIR'||$col['f'] == 'ESP'||$col['f'] == 'CHQ'||$col['f'] == 'BANQUE'||$col['f'] == 'N_CHEQUE'||$col['f'] == 'TITULAIRE_CHEQUE'||$col['f'] == 'TOTAL_PAYEMENT'))){
+            }elseif(($data['ISERROR']!=1) && ($data['totalpayementup']==1 && ($col['f'] == 'CLIENTS_FOURNISEUR'||$col['f'] == 'TTC')||($data['totalpayementup']==1 && ($col['f'] == 'DATE_PAYEMENT'||$col['f'] == 'REMARQUE_DIVERSE'||$col['f'] == 'VIR')))){
                 $this->SetFillColor(50,205,50);       
-            }elseif($data['totalpayementdown']==1 && ($col['f'] == 'CLIENTS_FOURNISEUR'||$col['f'] == 'T_TTC')||($data['totalpayementdown']==1 && ($col['f'] == 'DATE_PAYEMENT'||$col['f'] == 'REMARQUE_DIVERSE'||$col['f'] == 'CB'||$col['f'] == 'VIR'||$col['f'] == 'ESP'||$col['f'] == 'CHQ'||$col['f'] == 'BANQUE'||$col['f'] == 'N_CHEQUE'||$col['f'] == 'TITULAIRE_CHEQUE'||$col['f'] == 'TOTAL_PAYEMENT'))){
-                $this->SetFillColor(255,165,0);                
-            }elseif($data['UPLOAD_COMPTA']==1 && $col['f'] == 'N_FACTURE'){
-                $this->SetFillColor(50,205,50);        
+            }elseif(($data['ISERROR']!=1) && ($data['totalpayementdown']==1 && ($col['f'] == 'CLIENTS_FOURNISEUR'||$col['f'] == 'TTC')||($data['totalpayementdown']==1 && ($col['f'] == 'DATE_PAYEMENT'||$col['f'] == 'REMARQUE_DIVERSE'||$col['f'] == 'VIR')))){
+                $this->SetFillColor(255,165,0);  
             }else{
                 $this->SetFillColor($this->RowColors[$ci][0],$this->RowColors[$ci][1],$this->RowColors[$ci][2]);
             }        
@@ -62,8 +60,12 @@ function Row($data)
             $this->SetFillColor($this->RowColors[$ci][0],$this->RowColors[$ci][1],$this->RowColors[$ci][2]);
         }
         
-        if (array_key_exists("MorA", $data)&&$col['f'] != 'MorA'){
-        $this->Cell($col['w'],5,number_format($data[$col['f']], 2, ',', ' '),1,0,$col['a'],$fill);
+        if (array_key_exists("MorA", $data)&&$col['f'] != 'MorA'&&$col['f'] != 'TYPE'&&$data[$col['f']]!=''){
+            if ($data[$col['f']]=='0.00'){
+                $this->Cell($col['w'],5,"",1,0,$col['a'],$fill);
+            }else{
+                $this->Cell($col['w'],5,number_format($data[$col['f']], 2, ',', ' '),1,0,$col['a'],$fill);
+            }
         }else{
         $this->Cell($col['w'],5,$data[$col['f']],1,0,$col['a'],$fill);
         }

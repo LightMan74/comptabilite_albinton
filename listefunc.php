@@ -145,7 +145,7 @@ function loadpieces()
 
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            $tvareel = number_format(str_replace(",", ".", $row["TVA_TAUX"]) * 100, 2) ;
+            // $tvareel = number_format(str_replace(",", ".", $row["TVA_TAUX"]) * 100, 2) ;
             echo "<tr>";
             echo "<td>" . $row["id"] . "</td>";
             echo "<td>" . $row["timestamp"] . "</td>";

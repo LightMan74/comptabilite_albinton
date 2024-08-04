@@ -6,18 +6,18 @@ session_start();
 // global dbconnect;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $itemscount = 0;
-    foreach($_POST['HT'] as $k => $v) {
-        if ($_POST['HT'][$itemscount] !== "") {
-            ++$itemscount;
-        }
-    }
-    $itemsinitcount = 0;
-    foreach($_POST['IDINIT'] as $k => $v) {
-        if ($_POST['IDINIT'][$itemsinitcount] !== "") {
-            ++$itemsinitcount;
-        }
-    }
+    // $itemscount = 0;
+    // foreach($_POST['HT'] as $k => $v) {
+    //     if ($_POST['HT'][$itemscount] !== "") {
+    //         ++$itemscount;
+    //     }
+    // }
+    // $itemsinitcount = 0;
+    // foreach($_POST['IDINIT'] as $k => $v) {
+    //     if ($_POST['IDINIT'][$itemsinitcount] !== "") {
+    //         ++$itemsinitcount;
+    //     }
+    // }
 
     if ($_POST["DATE_FACTURE"] != '') {
         $splitdate = explode("-", $_POST["DATE_FACTURE"]);
@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ?>
 
 <script type="text/javascript">
-    window.location.href = "liste.php";
+window.location.href = "liste.php";
 </script>
 <?php
         exit();
@@ -122,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['keepfiltre'] = true; ?>
 
 <script type="text/javascript">
-    window.location.href = "liste.php";
+window.location.href = "liste.php";
 </script>
 <?php
     } else {
@@ -162,7 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ?>
 
 <script type="text/javascript">
-    toogleForm('modif-popup');
+toogleForm('modif-popup');
 </script>
 
 <?php

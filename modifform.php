@@ -96,7 +96,7 @@ echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de 
                             <option value=""></option>
                             <option value="AUTRE">AUTRE</option>
                         </select>
-                        <input name="type" id="autretype" value="<?php echo $row["TYPE"] ?>" style="display:none;" />
+                        <input name="TYPE" id="autretype" value="<?php echo $row["TYPE"] ?>" style="display:none;" />
                     </th>
                     </th>
                 </tr>
@@ -217,7 +217,11 @@ echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de 
                             <input name="IDMOIS" id="autreselectidmois" value="<?php if ($row['IDMOIS'] != "") {
                                 echo $row['IDMOIS'];
                             } else {
-                                echo date("Y-m", strtotime('first day of this month')) ;
+                                if (date("m")>6){
+                                    echo date("Y") ."-".date("Y") + 1;
+                                }else{
+                                echo date("Y") - 1 ."-".date("Y") ;
+                            }
                             }?>" style="width:100%;height: 3vh;text-align: center;display:none;" />
 
                         </th>
