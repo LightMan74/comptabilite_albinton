@@ -81,8 +81,7 @@ function loadpieces()
     $wherecondition . " " . "ORDER BY create_timestamp DESC"
      . ", cast(concat(SUBSTR(`DATE_FACTURE`, 7, 4), SUBSTR(`DATE_FACTURE`, 4, 2), SUBSTR(`DATE_FACTURE`, 1, 2)) as unsigned) DESC";
     $sql = "SELECT * FROM `comptabilite` WHERE `id` <> '1' AND  " . $wherecondition;
-    $sql2 = "SELECT 
-    1500.00-
+    $sql2 = "SELECT
     IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` is not null),0)-
     IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` is not null),0) as compte_reel,
     IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` is null),0) as credit, 

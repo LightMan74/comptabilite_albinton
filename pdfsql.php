@@ -48,15 +48,24 @@ if (mysqli_num_rows($result) > 0) {
         SELECT `IDMOIS` AS MorA, `TYPE`,
         SUM(case when `CREDIT` IS NOT NULL then `VIR` else 0 end) AS CREDIT_TTC,
         SUM(case when `CREDIT` IS NULL then `VIR` else 0 end) AS DEBIT_TTC
-        FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `TYPE` ORDER BY FIELD(`TYPE`,'','TOTAL') ASC, `TYPE` ASC;";
+        FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `TYPE` ORDER BY FIELD(`TYPE`,'','TOTAL','SOLDE') ASC, `TYPE` ASC;";
 
         $pdf->AddPage('P', 'A4');
+        
 
-        $pdf->AddCol('MorA', 50, 'SAISON', 'C');
-        $pdf->AddCol('TYPE', 50, 'CATEGORIE', 'C');
+        $pdf->AddCol('str', 200, 'BILAN FINANCIE', 'C');
+        $pdf->Table(dbconnect, "SELECT '".$row["IDMOIS"]."' as str", $prop);
+
+        $pdf->AddCol('TYPE', 100, 'CATEGORIE', 'C');
         $pdf->AddCol('CREDIT_TTC', 50, 'CREDIT_TTC', 'C');
         $pdf->AddCol('DEBIT_TTC', 50, 'DEBIT_TTC', 'C');
+        $pdf->Table(dbconnect, $sql, $prop);
 
+        $sql = "SELECT
+        SUM(case when `CREDIT` IS NOT NULL then `VIR` else 0 end) -
+        SUM(case when `CREDIT` IS NULL then `VIR` else 0 end) AS SOLDE_TTC
+        FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `IDMOIS`";
+        $pdf->AddCol('SOLDE_TTC', 200, 'SOLDE', 'C');
         $pdf->Table(dbconnect, $sql, $prop);
 
 
