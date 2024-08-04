@@ -75,9 +75,9 @@
                     <div class="nav-fullscreen">
                         <ul class="nav-fullscreen__items">
                             <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post" style="margin: 0;">
+                                <input class="btn btn-outline-danger btncat" value="EXPORT COMPTABILITE" onclick="window.open('pdfsql.php', '_blank');" />
                                 <br>
                                 <input class="btn btn-outline-danger btncat" type="submit" name="config" value="CONFIG" />
-                                <br>
                                 <br>
                                 <?php echo 'Utillisateur : ' . htmlspecialchars($_SESSION["username"]); ?>
                                 <a href="../logout.php"><input class="btn btn-outline-danger btncat" value="DECONNEXION"></a>
