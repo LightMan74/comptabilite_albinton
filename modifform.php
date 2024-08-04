@@ -1,5 +1,19 @@
 <?php
-include "settings.php"
+// include "settings.php".
+
+$type = array();
+$typecb = array();
+$sqlconfig = "SELECT `TYPE`,`TYPE_CD` FROM `config_compta` WHERE 1";
+$resultconfig = mysqli_query(dbconnect, $sqlconfig);
+if (mysqli_num_rows($resultconfig) > 0) {
+    while ($rowconfig = mysqli_fetch_assoc($resultconfig)) {
+        $type[] = $rowconfig["TYPE"];
+        $typecb[] = $rowconfig["TYPE_CD"];
+    }
+    $type = array_filter($type);
+    $typecb = array_filter($typecb);
+}
+
 ?>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- <link href="CSS_JS/select2.css" rel="stylesheet" /> -->
@@ -76,7 +90,7 @@ echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de 
                         <select name="type0" id="cbtype" onchange="energiechange('cbtype','autretype')">
                             <option value="<?php echo $row["TYPE"] ?>" selected><?php echo $row["TYPE"] ?></option>
                             <?php
-                        foreach ($setting_type as $it) {
+                        foreach ($type as $it) {
                             echo '<option value="'.$it.'">'.$it.'</option>';
                         } ?>
                             <option value=""></option>
@@ -171,8 +185,43 @@ echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de 
                 </table>
                 <br>
 
-                <table id=" aze" class="blueTable tablenoFixHead">
+                <table id="aze" class="blueTable tablenoFixHead">
                     <tr>
+                        <th style="width:50%;">
+                            <br>IDMOIS<br>
+                            <select id="selectidmois" style="width:100%;height: 3vh;text-align: center;" name="IDMOIS2" onchange="energiechange('selectidmois','autreselectidmois')">
+                                <?php
+                                if ($row['IDMOIS'] != "") {
+                                    echo '<option value="'.$row['IDMOIS'].'">'.$row['IDMOIS'].'</option>';
+                                }
+        $startdate = date("Y")+1;
+        $enddate = date("Y")-2;        
+        while ($startdate > $enddate) {
+            echo '<option value="'.$startdate - 1 .'-'.$startdate.'">'.$startdate - 1 .'-'.$startdate.'</option>';
+            $startdate = $startdate - 1;
+        }
+        ?>
+                                <option value="AUTRE" selected>AUTRE</option>
+                            </select>
+                            <script>
+                            document.getElementById('selectidmois').value = '<?php if ($row['IDMOIS'] != "") {
+                                    echo $row['IDMOIS'];
+                                } else {
+                                    if (date("m")>6){
+                                        echo date("Y") ."-".date("Y") + 1;
+                                    }else{
+                                    echo date("Y") - 1 ."-".date("Y") ;
+                                }
+                                }?>';
+                            </script>
+                            <input name="IDMOIS" id="autreselectidmois" value="<?php if ($row['IDMOIS'] != "") {
+                                echo $row['IDMOIS'];
+                            } else {
+                                echo date("Y-m", strtotime('first day of this month')) ;
+                            }?>" style="width:100%;height: 3vh;text-align: center;display:none;" />
+
+                        </th>
+
                         <th>
                             <br>COLORER SI ERREUR ?<br>
                             <select id="selectiserror" style="width:100%;height: 3vh;text-align: center;" name="ISERROR">
