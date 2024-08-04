@@ -41,7 +41,7 @@ function modifconfig()
                 <input name="T[]" value="<?php echo $rowinter["TYPE"]; ?>">
             </th>
             <th>
-                <input name="TCD[]" value="<?php echo $rowinter["TYPE_CD"]; ?>">
+                <input name="SOLDE[]" value="<?php echo $rowinter["TYPE_CD"]; ?>">
             </th>
         </tr>
 
@@ -78,7 +78,7 @@ function addRow() {
 
     // Add data to c1 and c2
     c0.innerHTML = '<input name="T[]" value="">';
-    c1.innerHTML = '<input name="TCD[]" value="">';
+    c1.innerHTML = '<input name="SOLDE[]" value="">';
 
 }
 </script>
@@ -91,13 +91,13 @@ function addRow() {
 
 function modifconfigupdate()
 {
-    print_r($_POST);
+    // print_r($_POST);
 
     // var_dump($_POST['T']);
     // var_dump($_POST['TCD']);
    
     $_POST['T'] = array_values(array_filter($_POST['T']));
-    $_POST['TCD'] = array_values(array_filter($_POST['TCD']));
+    $_POST['SOLDE'] = array_values(array_filter($_POST['SOLDE']));
     // exit;
     $itemscount = 0;
     foreach($_POST['T'] as $k => $v) {
@@ -109,7 +109,7 @@ function modifconfigupdate()
 
     $sqlitems = "";
     for ($i = 0; $i <= $itemscount - 1; $i++) {
-        $sqlitems .= "('" . strtoupper($_POST['T'][$i])."','".strtoupper($_POST['TCD'][$i]). "'),";
+        $sqlitems .= "('" . strtoupper($_POST['T'][$i])."','".strtoupper($_POST['SOLDE'][$i]). "'),";
     }
 
     $sqlitems = rtrim($sqlitems, ",");
