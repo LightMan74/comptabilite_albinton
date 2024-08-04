@@ -37,8 +37,8 @@ if (mysqli_num_rows($result) > 0) {
 
         $sql =
         "SELECT `IDMOIS` AS MorA, 'TOTAL' as TYPE,
-        SUM(case when `CREDIT` IS NOT NULL then `TTC` else 0 end) AS CREDIT_TTC,
-        SUM(case when `CREDIT` IS NULL then `TTC` else 0 end) AS DEBIT_TTC
+        SUM(case when `CREDIT` IS NOT NULL then `VIR` else 0 end) AS CREDIT_TTC,
+        SUM(case when `CREDIT` IS NULL then `VIR` else 0 end) AS DEBIT_TTC
         FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `IDMOIS`
         UNION ALL
         SELECT '' AS MorA, '' as TYPE,
@@ -46,8 +46,8 @@ if (mysqli_num_rows($result) > 0) {
         '' AS DEBIT_TTC
         UNION ALL
         SELECT `IDMOIS` AS MorA, `TYPE`,
-        SUM(case when `CREDIT` IS NOT NULL then `TTC` else 0 end) AS CREDIT_TTC,
-        SUM(case when `CREDIT` IS NULL then `TTC` else 0 end) AS DEBIT_TTC
+        SUM(case when `CREDIT` IS NOT NULL then `VIR` else 0 end) AS CREDIT_TTC,
+        SUM(case when `CREDIT` IS NULL then `VIR` else 0 end) AS DEBIT_TTC
         FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `TYPE` ORDER BY FIELD(`TYPE`,'','TOTAL') ASC, `TYPE` ASC;";
 
         $pdf->AddPage('P', 'A4');
