@@ -31,34 +31,32 @@ $pdf = new PDF_MySQL_Table('P', 'mm', 'A4');
 $pdf->SetAutoPageBreak(true, 0);
 
 $result = mysqli_query(dbconnect, "SELECT DISTINCT `IDMOIS` FROM `comptabilite` where `id` <> 1 order by `IDMOIS` DESC;");
-$annee = array();
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) { 
-$sql =
-    "SELECT `IDMOIS` AS MorA, 'TOTAL' as TYPE,
-    SUM(case when `CREDIT` IS NOT NULL then `TTC` else 0 end) AS CREDIT_TTC,
-    SUM(case when `CREDIT` IS NULL then `TTC` else 0 end) AS DEBIT_TTC
-    FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `IDMOIS`
-    UNION ALL
-    SELECT '' AS MorA, '' as TYPE,
-    '' AS CREDIT_TTC,
-    '' AS DEBIT_TTC
-    UNION ALL
-    SELECT `IDMOIS` AS MorA, `TYPE`,
-    SUM(case when `CREDIT` IS NOT NULL then `TTC` else 0 end) AS CREDIT_TTC,
-    SUM(case when `CREDIT` IS NULL then `TTC` else 0 end) AS DEBIT_TTC
-    FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `TYPE` ORDER BY FIELD(`TYPE`,'','TOTAL') ASC, `TYPE` ASC;";
+        $sql =
+        "SELECT `IDMOIS` AS MorA, 'TOTAL' as TYPE,
+        SUM(case when `CREDIT` IS NOT NULL then `TTC` else 0 end) AS CREDIT_TTC,
+        SUM(case when `CREDIT` IS NULL then `TTC` else 0 end) AS DEBIT_TTC
+        FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `IDMOIS`
+        UNION ALL
+        SELECT '' AS MorA, '' as TYPE,
+        '' AS CREDIT_TTC,
+        '' AS DEBIT_TTC
+        UNION ALL
+        SELECT `IDMOIS` AS MorA, `TYPE`,
+        SUM(case when `CREDIT` IS NOT NULL then `TTC` else 0 end) AS CREDIT_TTC,
+        SUM(case when `CREDIT` IS NULL then `TTC` else 0 end) AS DEBIT_TTC
+        FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `TYPE` ORDER BY FIELD(`TYPE`,'','TOTAL') ASC, `TYPE` ASC;";
 
-    $pdf->AddPage();
+        $pdf->AddPage();
 
-    $pdf->AddCol('MorA', 50, 'SAISON', 'C');
-    $pdf->AddCol('TYPE', 50, 'CATEGORIE', 'C');
-    $pdf->AddCol('CREDIT_TTC', 50, 'CREDIT_TTC', 'C');
-    $pdf->AddCol('DEBIT_TTC', 50, 'DEBIT_TTC', 'C');
+        $pdf->AddCol('MorA', 50, 'SAISON', 'C');
+        $pdf->AddCol('TYPE', 50, 'CATEGORIE', 'C');
+        $pdf->AddCol('CREDIT_TTC', 50, 'CREDIT_TTC', 'C');
+        $pdf->AddCol('DEBIT_TTC', 50, 'DEBIT_TTC', 'C');
 
-    $pdf->Table(dbconnect, $sql, $prop);
-
-}
+        $pdf->Table(dbconnect, $sql, $prop);
+    }
 }
 
 
