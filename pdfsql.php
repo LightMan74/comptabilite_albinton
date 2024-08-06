@@ -53,7 +53,7 @@ if (mysqli_num_rows($result) > 0) {
         $pdf->AddPage('P', 'A4');
         
 
-        $pdf->AddCol('str', 200, 'BILAN FINANCIE', 'C');
+        $pdf->AddCol('str', 200, 'BILAN FINANCIER', 'C');
         $pdf->Table(dbconnect, "SELECT '".$row["IDMOIS"]."' as str", $prop);
 
         $pdf->AddCol('TYPE', 100, 'CATEGORIE', 'C');

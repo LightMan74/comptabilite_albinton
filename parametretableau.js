@@ -75,7 +75,7 @@ var tfConfig = {
     load_filters_on_demand: false, //true
 
     no_results_message: true,
-    watermark: ['id', 'timestamp', 'DATE_FACTURE', 'IDMOIS', 'CorD', 'TYPE', 'TTC', 'CLIENTS_FOURNISEUR', 'REMARQUES_DIVERSES', 'DATE_PAYEMENT', 'MONTANT', 'OPTIONS'],
+    watermark: ['id', 'timestamp', 'DATE_FACTURE', 'IDMOIS', 'CorD', 'TYPE', 'TTC', 'CLIENTS_FOURNISEUR', 'REMARQUES_DIVERSES', 'DATE_PAIEMENT', 'MONTANT', 'OPTIONS'],
     //['id', 'timestamp', 'N_FACTURE', 'DATE_FACTURE', 'IDMOIS', 'DEBIT', 'CREDIT', 'TYPE', 'TVA', 'HT', 'TVA', 'TTC', 'T_HT', 'T_TVA', 'T_TTC', 'CLIENTS_FOURNISEUR', 'REMARQUES_DIVERSES', 'DATE_PAYEMENT', 'CB', 'VIR', 'ESP', 'CHQ', 'BANQUE', 'N_CHEQUE', 'TITULAIRE_CHEQUE', 'TOTAL_PAYMENT', 'RBS', 'COMPTE_DEBIT', 'COMPTE_CREDIT', 'OPTIONS', 'ISEEROR', 'UPLOAD_COMPTA', 'COPIE'],
     col_types: [
         'number',
@@ -95,14 +95,14 @@ var tfConfig = {
 
     // col_0: 'none',
     // col_1: 'none',
-    col_6: 'select',
+    col_5: 'select',
     // col_8: 'select',
     // col_27: 'select',
     // col_28: 'select',
     // col_29: 'none',
     // col_30: 'select',
     // col_31: 'select',
-    col_12: 'none',
+    col_11: 'none',
 
 };
 

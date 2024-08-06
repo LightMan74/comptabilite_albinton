@@ -16,7 +16,8 @@ const isMobile = {
         return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
     },
     any: function() {
-        if (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()) {
+        if (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile
+            .Windows()) {
             return '_blank';
         } else {
             return '_compta';
@@ -120,7 +121,7 @@ function loadpieces()
             <th style="width:6%">id</th>
             <th style="width:6%">timestamp</th>
             <th style="width:6%">DATE_FACTURE</th>
-            <th style="width:6%;font-size:85%">IDMOIS</th>
+            <th style="width:6%;font-size:85%">SAISON</th>
             <!-- <th style="width:6%;font-size:75%">DEBIT</th> -->
             <!-- <th style="width:6%;font-size:75%">CREDIT</th> -->
             <th style="width:6%">CorD</th>
@@ -128,7 +129,7 @@ function loadpieces()
             <th style="width:6%">TTC</th>
             <th style="width:15%;font-size:85%">CLIENTS_FOURNISEUR</th>
             <th style="width:15%">REMARQUES_DIVERSES</th>
-            <th style="width:3%">DATE_PAYEMENT</th>
+            <th style="width:3%">DATE_PAIEMENT</th>
             <th style="width:6%">MONTANT</th>
             <th style="width:12%">OPTIONS</th>
             <th style="width:12%">ERREUR</th>
@@ -184,13 +185,15 @@ function loadpieces()
         <div style="height: 75%;">
             <form id="searchclienttab" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post">
                 <input name="ID" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" style="display:none" />
-                <input class="btn menu btn-warning" type="submit" name="openmodifitem" value="MODIFER" style="height: 90%;" />
+                <input class="btn menu btn-warning" type="submit" name="openmodifitem" value="MODIFER"
+                    style="height: 90%;" />
             </form>
         </div>
         <div style="height: 25%;">
             <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post">
                 <input name="ID" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" style="display:none" />
-                <input class="btn menu btn-danger" type="submit" name="confitem" value="SUPPRIMER" style="height: 90%;" />
+                <input class="btn menu btn-danger" type="submit" name="confitem" value="SUPPRIMER"
+                    style="height: 90%;" />
             </form>
         </div>
         <?php
@@ -209,7 +212,7 @@ function loadpieces()
             <th>id</th>
             <th>timestamp</th>
             <th>DATE_FACTURE</th>
-            <th>IDMOIS</th>
+            <th>SAISON</th>
             <!-- <th>DEBIT</th>
         <th>CREDIT</th> -->
             <th>CorD</th>
@@ -217,7 +220,7 @@ function loadpieces()
             <th>TTC</th>
             <th>CLIENTS_FOURNISEUR</th>
             <th>REMARQUES_DIVERSES</th>
-            <th>DATE_PAYEMENT</th>
+            <th>DATE_PAIEMENT</th>
             <th>MONTANT</th>
             <th>OPTIONS</th>
             <th>ERREUR</th>
