@@ -28,7 +28,7 @@ function modifconfig()
                 <font>TYPE</font>
             </th>
             <th>
-                <font>TYPE CREDIT OU DEBIT</font>
+                <font>1 - COMPTE COURANT / 2 - COMPTE EPARGNE</font>
             </th>
         </tr>
 
