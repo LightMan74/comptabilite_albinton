@@ -98,7 +98,6 @@ echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de 
                         </select>
                         <input name="TYPE" id="autretype" value="<?php echo $row["TYPE"] ?>" style="display:none;" />
                     </th>
-                    </th>
                 </tr>
             </table>
 

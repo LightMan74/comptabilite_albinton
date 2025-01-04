@@ -20,12 +20,15 @@ if (isset($_POST['viewfilecompta'])) {
             $extensions_data = 'data:application/'.$row['extension'];
         }
 
-        echo '<script>';
-        echo 'function myRedirectFunction() {';
-        echo 'window.location.replace("'.$extensions_data.';base64,'. $row['file'].'");';
-        echo '}';
-        echo '</script>';
-        echo'<body onload="myRedirectFunction()">';
+        // echo '<script>';
+        // echo 'function myRedirectFunction() {';
+        // echo 'window.location.replace("'.$extensions_data.';base64,'. $row['file'].'");';
+        // echo '}';
+        // echo '</script>';
+        // echo'<body onload="myRedirectFunction()">';
+        // echo '</body>';
+        echo '<body>';
+        echo '<iframe width="100%" height="100%" src="'.$extensions_data.';base64,'. $row['file'].'"></iframe>';
         echo '</body>';
     }
 
