@@ -70,7 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql .= "`CREATE_TIMESTAMP`='".$_POST["CREATE_TIMESTAMP"]."',";
         } else {
             $sql .=  "`CREATE_TIMESTAMP`='".date("Y-m-d H:i:s")."',";
-        }
+        }        
+            $sql .=  "`timestamp`='".date("Y-m-d H:i:s")."',";
         if ($_POST["ISERROR"] != '') {
             $sql .=  "`ISERROR`='".$_POST["ISERROR"]."',";
         }
@@ -99,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
 
         }
-        $sqlselectidfile = 'SELECT id FROM comptabilite WHERE `id` <> 1 ORDER BY CREATE_TIMESTAMP DESC LIMIT 1';
+        $sqlselectidfile = 'SELECT id FROM comptabilite WHERE `id` <> 1 ORDER BY `timestamp` DESC LIMIT 1';
 
         $result = mysqli_query(dbconnect, $sqlselectidfile);
         if (mysqli_num_rows($result) > 0) {

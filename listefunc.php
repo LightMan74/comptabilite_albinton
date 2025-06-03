@@ -81,7 +81,7 @@ function loadpieces()
     $wherecondition =
     $wherecondition . " " . "ORDER BY create_timestamp DESC"
      . ", cast(concat(SUBSTR(`DATE_FACTURE`, 7, 4), SUBSTR(`DATE_FACTURE`, 4, 2), SUBSTR(`DATE_FACTURE`, 1, 2)) as unsigned) DESC";
-    $sql = "SELECT * FROM `comptabilite` WHERE `id` <> '1' AND  " . $wherecondition;
+    $sql = "SELECT *,(SELECT count(*) FROM `compta_files` where `comptabilite`.`id` = `compta_files`.`idclient`) as 'FILES_COUNT' FROM `comptabilite` WHERE `id` <> '1' AND  " . $wherecondition;
     $sql2 = "SELECT
     IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` is not null),0)-
     IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` is not null),0) as compte_reel,
@@ -132,7 +132,8 @@ function loadpieces()
             <th style="width:3%">DATE_PAIEMENT</th>
             <th style="width:6%">MONTANT</th>
             <th style="width:12%">OPTIONS</th>
-            <th style="width:12%">ERREUR</th>
+            <th style="width:6%">ERREUR</th>
+            <th style="width:6%">FICHIER</th>
         </tr>
     </thead>
     <tbody>
@@ -185,20 +186,19 @@ function loadpieces()
         <div style="height: 75%;">
             <form id="searchclienttab" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post">
                 <input name="ID" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" style="display:none" />
-                <input class="btn menu btn-warning" type="submit" name="openmodifitem" value="MODIFER"
-                    style="height: 90%;" />
+                <input class="btn menu btn-warning" type="submit" name="openmodifitem" value="MODIFER" style="height: 90%;" />
             </form>
         </div>
         <div style="height: 25%;">
             <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post">
                 <input name="ID" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" style="display:none" />
-                <input class="btn menu btn-danger" type="submit" name="confitem" value="SUPPRIMER"
-                    style="height: 90%;" />
+                <input class="btn menu btn-danger" type="submit" name="confitem" value="SUPPRIMER" style="height: 90%;" />
             </form>
         </div>
         <?php
                echo "</td>";
             echo "<td>" . $row["ISERROR"] . "</td>";
+            echo "<td>" . $row["FILES_COUNT"] . "</td>";
             ?>
 
         </tr>
