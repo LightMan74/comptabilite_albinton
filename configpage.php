@@ -135,7 +135,12 @@ function modifconfigupdate()
     }
 
     //mysqli_close(dbconnect);
-    loadpieces();
+    // loadpieces();
+            ?>
+<script type="text/javascript">
+window.location.href = "liste.php";
+</script>
+<?php
 }
 
 
