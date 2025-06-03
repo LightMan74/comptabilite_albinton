@@ -15,9 +15,9 @@ var tfConfig = {
         //     name: 'filtersVisibility',
         //     visible_at_start: true
         // },
-        // {
-        //    name: 'sort'
-        //     },
+        {
+            name: 'sort'
+        },
     ],
 
     state: {// Enable state persistence
