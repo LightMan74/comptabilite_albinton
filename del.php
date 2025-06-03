@@ -1,8 +1,11 @@
 <?php
 session_start();
 require_once "config.php";
+if (isset($_POST['confitemfile'])){
+$id = $_POST["idfiles"];
+}else{
 $id = $_POST["ID"];
-
+}
 if ((isset($_POST['delitem']) || isset($_POST['delitemfile'])) && $_POST["confdel"] == $id) {
     // $id = $_POST["ID"];
     if (isset($_POST['delitemfile'])) {
@@ -33,7 +36,7 @@ if ((isset($_POST['delitem']) || isset($_POST['delitemfile'])) && $_POST["confde
     // mysqli_close(dbconnect);
     ?>
 <script type="text/javascript">
-	window.location.href = "liste.php";
+window.location.href = "liste.php";
 </script>
 <?php
     exit();
@@ -42,7 +45,7 @@ if ((isset($_POST['delitem']) || isset($_POST['delitemfile'])) && $_POST["confde
 if (isset($_POST['confdel']) && $_POST["confdel"] != $id) {
     ?>
 <script type="text/javascript">
-	window.location.href = "liste.php";
+window.location.href = "liste.php";
 </script>
 <?php
     exit();
@@ -55,7 +58,7 @@ if (isset($_POST['confitem']) || isset($_POST['confitemfile'])) {
     ?>
 
 <script type="text/javascript">
-	toogleForm('del-popup');
+toogleForm('del-popup');
 </script>
 
 <?php

@@ -1,6 +1,6 @@
 <?php
 
-if ($_SERVER['SERVER_NAME'] == "lansard.ch") {
+if ($_SERVER['SERVER_NAME'] == "site.lansard.ch") {
     define('DB_NAME', 'albinton');
 }
 if ($_SERVER['SERVER_NAME'] == "compta.albinton.fr") {

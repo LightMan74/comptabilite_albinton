@@ -1,6 +1,6 @@
     <?php
     if(isset($_POST['modifitem']) || isset($_POST['additem'])) {
-        $id = $_POST["ID"];
+        $id = $_POST["IDCLIENT"];
         $total_count = count($_FILES['file']['name']);
         if (!empty($_FILES['file']['name'][0])) {
             for ($i = 0 ; $i < $total_count ; $i++) {

@@ -31,14 +31,14 @@ while ($row = mysqli_fetch_assoc($result)) {
     ?>
             <th>
                 <!-- <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post"> -->
-                <input name="idfiles" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" style="display:none" />
+                <input name="idfiles" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" />
                 <input class="btn menu btn-warning" type="submit" name="viewfilecompta" value="<?php echo $row['name']; ?>" formtarget="_viewcomptafile" />
                 <!-- </form> -->
             </th>
             <th>
                 <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post">
-                    <input name="ID" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" style="display:none" />
-                    <input name="IDCLIENT" type="text" maxlength="255" value="<?php echo $id; ?>" style="display:none" />
+                    <input name="ID" type="text" maxlength="255" value="<?php echo $id; ?>" />
+                    <input name="idfiles" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" />
                     <input class="btn btn-danger" type="submit" name="confitemfile" value="SUPRIMER" />
                 </form>
             </th>

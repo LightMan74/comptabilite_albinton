@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 window.location.href = "liste.php";
 </script>
 <?php
-        exit();
+        // exit();
     }
     ?>
 <?php
