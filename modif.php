@@ -104,9 +104,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = mysqli_query(dbconnect, $sqlselectidfile);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
-                $_POST["ID"] = $row["id"];
+                $_POST["IDCLIENT"] = $row["id"];
             }
         }
+        // $last_id = mysqli_insert_id(dbconnect);
         include 'uploadfile.php';
         ?>
 

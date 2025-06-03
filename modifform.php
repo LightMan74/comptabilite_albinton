@@ -63,7 +63,7 @@ function setRequired(element) {
                 <tr>
                     <th>
                         DATE FACTURE<br><input type="date" style="width:100%;height: 3vh;text-align: center;" type="text" class="form-control date" name="DATE_FACTURE" value="<?php $splitdate = explode("/", $row['DATE_FACTURE']);
-echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de facture" required="required">
+echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de facture" required="required" onfocus="this.showPicker()">
                     </th>
                 </tr>
             </table>
@@ -173,7 +173,7 @@ readfileform($row["id"]);
                 <tr>
                     <th>
                         DATE PAYEMENT<br><input type="date" style="width:100%;height: 3vh;text-align: center;" type="text" class="form-control date" name="DATE_PAYEMENT" value="<?php $splitdate = explode("/", $row['DATE_PAYEMENT']);
-echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de payement">
+echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de payement" onfocus="this.showPicker()">
                     </th>
                 </tr>
                 <br>
