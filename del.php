@@ -2,7 +2,7 @@
 session_start();
 require_once "config.php";
 if (isset($_POST['confitemfile'])){
-$id = $_POST["idfiles"];
+$id = $_POST["btnsubmit0"];
 }else{
 $id = $_POST["ID"];
 }

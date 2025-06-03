@@ -4,7 +4,7 @@
 if (isset($_POST['viewfilecompta'])) {
     // include "config_upload.php";
 
-    $id = $_POST['idfiles'];
+    $id = $_POST['btnsubmit0'];
 
     $images_sql = "SELECT * FROM compta_files where id = $id";
     echo $images_sql;

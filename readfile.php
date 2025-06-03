@@ -30,17 +30,10 @@ function readfileform($idcall = 1)
 while ($row = mysqli_fetch_assoc($result)) {
     ?>
             <th>
-                <!-- <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post"> -->
-                <input name="idfiles" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" style="display:none;" />
-                <input class="btn menu btn-warning" type="submit" name="viewfilecompta" value="<?php echo $row['name']; ?>" formtarget="_viewcomptafile" />
-                <!-- </form> -->
+                <input class="btn menu btn-warning" type="submit" onclick="submitfiles(<?php echo $row['id'];?>,0)" name="viewfilecompta" value="<?php echo $row['name']; ?>" />
             </th>
             <th>
-                <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post">
-                    <input name="ID" type="text" maxlength="255" value="<?php echo $id; ?>" style="display:none;" />
-                    <input name="idfiles" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" style="display:none;" />
-                    <input class="btn btn-danger" type="submit" name="confitemfile" value="SUPRIMER" />
-                </form>
+                <input class="btn btn-danger" name="confitemfile" value="SUPRIMER" type="submit" onclick="submitfiles(<?php echo $row['id'].','.$id;?>)" />
             </th>
         </tr>
         <?php
@@ -52,3 +45,12 @@ while ($row = mysqli_fetch_assoc($result)) {
 <?php
 }
 ?>
+
+<input name="btnsubmit0" id="btnsubmit0" type="text" maxlength="255" value="" style="display:;" />
+<input name="btnsubmit1" id="btnsubmit1" type="text" maxlength="255" value="" style="display:;" />
+<script>
+function submitfiles(b0, b1) {
+    document.getElementById('btnsubmit0').value = b0;
+    document.getElementById('btnsubmit1').value = b1;
+}
+</script>
