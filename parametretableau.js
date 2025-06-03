@@ -136,6 +136,11 @@ function parseRows(tf) {
 
         var cell = row.cells[9];
         formatCell(tf, cell, 'DATE_PAYEMENT');
+
+
+        var cell = row.cells[13];
+        var cellref = row.cells[2];
+        formatCell(tf, cell, 'FICHIER', cellref);
     });
 }
 
@@ -172,6 +177,17 @@ function formatCell(tf, cell, forcondition, cellref = 0, cellref1 = 0, cellref2 
             }
             break;
 
+        case 'FICHIER':
+            cellData = cell.innerHTML;
+            if (cellData == '0') {
+                cell.style.backgroundColor = '#fcb605';
+                cellref.style.backgroundColor = '#fcb605';
+            }
+            if (cellData > '0') {
+                cell.style.backgroundColor = '#08AA30';
+                cellref.style.backgroundColor = '#08AA30';
+            }
+            break;
     }
 
 
