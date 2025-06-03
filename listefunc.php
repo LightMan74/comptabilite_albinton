@@ -83,8 +83,9 @@ function loadpieces()
      . ", cast(concat(SUBSTR(`DATE_FACTURE`, 7, 4), SUBSTR(`DATE_FACTURE`, 4, 2), SUBSTR(`DATE_FACTURE`, 1, 2)) as unsigned) DESC";
     $sql = "SELECT *,(SELECT count(*) FROM `compta_files` where `comptabilite`.`id` = `compta_files`.`idclient`) as 'FILES_COUNT' FROM `comptabilite` WHERE `id` <> '1' AND  " . $wherecondition;
     $sql2 = "SELECT
-    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` is not null),0)-
-    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` is not null),0) as compte_reel,
+    IFNULL((SELECT TYPE_CD FROM `config_compta` WHERE `id`=1),0) as soldedepart, 
+    IFNULL((SELECT sum(`VIR`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` is not null),0)-
+    IFNULL((SELECT sum(`VIR`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` is not null),0) as compte_reel,
     IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` is null),0) as credit, 
     IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` is null),0) as debit;";
     // SELECT * FROM `comptabilite` WHERE `DEBIT` is not null and TTC <> (`CB`+`VIR`+`ESP`) and `ISERROR` <> 1;
@@ -97,7 +98,7 @@ function loadpieces()
 
     if (mysqli_num_rows($result2) > 0) {
         while ($row = mysqli_fetch_assoc($result2)) {
-            echo '<br>COMPTE COURANT --> <span id="COMPTE_COURANT">'.$row["compte_reel"].'</span> €';
+            echo '<br>COMPTE COURANT --> <span id="COMPTE_COURANT">'.sprintf('%0.2f', ($row["compte_reel"] + $row["soldedepart"])).'</span> €';
             echo ' --- A PAYER --> <span id="COMPTE_COURANT_APAYER">'.$row["debit"].'</span> €';
             echo ' --- A RENTRER --> <span id="COMPTE_COURANT_APAYER">'.$row["credit"].'</span> €';
             echo ' --- COMPTE COURANT APRES RBS ET PAYEMENT --> <span id="COMPTE_COURANT_REEL">'.sprintf('%0.2f', (($row["compte_reel"] - $row["debit"]) + $row["credit"])).'</span> €';

@@ -65,7 +65,22 @@ if (mysqli_num_rows($result) > 0) {
         SUM(case when `CREDIT` IS NOT NULL then `VIR` else 0 end) -
         SUM(case when `CREDIT` IS NULL then `VIR` else 0 end) AS SOLDE_TTC
         FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `IDMOIS`";
-        $pdf->AddCol('SOLDE_TTC', 200, 'SOLDE', 'C');
+        $pdf->AddCol('', 100, '', 'C');
+        $pdf->AddCol('SOLDE_TTC', 100, 'RESULTAT', 'C');
+        $pdf->Table(dbconnect, $sql, $prop);
+
+        $sql = "SELECT
+        IFNULL((SELECT TYPE_CD FROM `config_compta` WHERE `id`=1) +
+        SUM(case when `CREDIT` IS NOT NULL then `VIR` else 0 end) -
+        SUM(case when `CREDIT` IS NULL then `VIR` else 0 end),0) as soldedepart
+        FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `IDMOIS`";
+        $pdf->AddCol('soldedepart', 200, 'SOLDE COMPTE COURANT', 'C');
+        $pdf->Table(dbconnect, $sql, $prop);
+
+        $sql = "SELECT
+        IFNULL((SELECT TYPE_CD FROM `config_compta` WHERE `id`=2),0) as soldedepart
+        FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `IDMOIS`";
+        $pdf->AddCol('soldedepart', 200, 'SOLDE COMPTE EPARGNE', 'C');
         $pdf->Table(dbconnect, $sql, $prop);
 
 
