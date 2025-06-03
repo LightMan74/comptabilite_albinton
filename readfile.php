@@ -46,8 +46,8 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 ?>
 
-<input name="btnsubmit0" id="btnsubmit0" type="text" maxlength="255" value="" style="display:;" />
-<input name="btnsubmit1" id="btnsubmit1" type="text" maxlength="255" value="" style="display:;" />
+<input name="btnsubmit0" id="btnsubmit0" type="text" maxlength="255" value="" style="display:none;" />
+<input name="btnsubmit1" id="btnsubmit1" type="text" maxlength="255" value="" style="display:none;" />
 <script>
 function submitfiles(b0, b1) {
     document.getElementById('btnsubmit0').value = b0;
