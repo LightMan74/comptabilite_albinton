@@ -152,7 +152,7 @@ if (isset($_POST['config'])) {
         $_SESSION["comptacheckpoint"] = '2';
         echo "-->" . $_SESSION["comptacheckpoint"];
         // echo "<script>var filteratstart = [0, 1, 6, 15, 17, 18, 19, 20, 21, 22, 23, 25];</script>";
-        echo "<script>var filteratstart = [0, 1, 3, 12];</script>";
+        echo "<script>var filteratstart = [0, 1, 3, 12, 13];</script>";
 
         // echo "<script>var filteratstart = '';</script>";
     } else {
