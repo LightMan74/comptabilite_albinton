@@ -246,7 +246,7 @@ echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de 
                 <br>
                 <input style="display:none" id="element_6" name="CREATE_TIMESTAMP" class="element text medium" type="text" maxlength="255" value="<?php echo $row["CREATE_TIMESTAMP"]; ?>" />
                 <input style="display:none" id="element_6" name="ID" class="element text medium" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" />
-                <input name="IDCLIENT" type="text" maxlength="255" value="<?php echo $id; ?>" />
+                <input name="IDCLIENT" type="text" maxlength="255" value="<?php echo $id; ?>" style="display:none;" />
                 <input id="saveForm" class="btn btn-outline-primary" type="submit" name="<?php echo $namemodifierORadd; ?>" value="<?php echo $modifierORadd; ?>" style="width:100%" ; />
                 <br>
 
