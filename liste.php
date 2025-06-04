@@ -39,7 +39,11 @@
     </script>
     <?php
     }
-
+if (isset($_POST['exportpatient'])) {
+    include "csvsql.php";
+    // loadpieces();
+    exit();
+}
 
 
     function getUpperPost($keepVar = true)
@@ -76,7 +80,7 @@
                         <ul class="nav-fullscreen__items">
                             <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post" style="margin: 0;">
                                 <input class="btn btn-outline-danger btncat" value="EXPORT COMPTABILITE" onclick="window.open('pdfsql.php', '_blank');" />
-                                <br>
+                                <input class="btn btn-outline-danger btncat" type="submit" name="exportpatient" value="EXPORT COMPTA CSV" />
                                 <input class="btn btn-outline-danger btncat" type="submit" name="config" value="CONFIG" />
                                 <br>
                                 <?php echo 'Utillisateur : ' . htmlspecialchars($_SESSION["username"]); ?>
