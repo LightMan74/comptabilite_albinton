@@ -115,7 +115,7 @@ function loadpieces()
         $result = mysqli_query(dbconnect, $sql);
 
         ?>
-
+<script type="text/javascript" src="CSS_JS/maintainscroll.js"></script>
 <table id="searchtable" class="blueTable tableFixHead">
     <thead>
         <tr>
