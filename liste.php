@@ -1,3 +1,25 @@
+<?php
+            session_start();
+
+    // var_dump($_POST);
+
+    include "config.php";
+    // var_dump($_SESSION);
+    if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1' && (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] != true)) {
+        // exit;
+        ?>
+<script type="text/javascript">
+window.location.href = "login.php";
+</script>
+<?php
+    }
+if (isset($_POST['exportpatient'])) {
+    include "csvsql.php";
+    // loadpieces();
+    exit();
+}
+?>
+
 <body>
     <link rel="stylesheet" type="text/css" href="CSS_JS/popup.css" media="all">
     <link rel="stylesheet" type="text/css" href="CSS_JS/stockstyle.css" media="all">
@@ -24,28 +46,8 @@
     <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script> -->
     <link rel="icon" type="image/png" sizes="32x32" href="logo.ico">
     <title>COMPTA</title>
+
     <?php
-            session_start();
-
-    // var_dump($_POST);
-
-    include "config.php";
-    // var_dump($_SESSION);
-    if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1' && (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] != true)) {
-        // exit;
-        ?>
-    <script type="text/javascript">
-    window.location.href = "login.php";
-    </script>
-    <?php
-    }
-if (isset($_POST['exportpatient'])) {
-    include "csvsql.php";
-    // loadpieces();
-    exit();
-}
-
-
     function getUpperPost($keepVar = true)
     {
         $return_array = array();

@@ -15,29 +15,6 @@ window.location.href = "login.php";
 
 include 'config.php';
 
-
-
-//php-cgi -f csvsql.php  intervaldate='2021-04-01' interval='3' compilation=true creditdebit=true
-// $_GET['intervaldate']; // date yyyy-mm-01 >= 2021-04-01
-// $_GET['interval']; // int > 0 et <= diff mois 2021-04-01 et NOW
-// $_GET['compilation']; // TRUE or FALSE --- GENERER COMPILATION AVEC CREDIT ET DEBIT
-// $_GET['creditdebit']; // TRUE or FALSE --- GENERER SEPAREMENT CREDIT ET DEBIT
-
-
-// $host = '192.168.3.70';
-// $username = 'siteconnect';
-// $password = 'Azertyuiop!1';
-// $database = 'recappi';
-// Connexion � la base
-// dbconnect = mysqli_connect($host, $username, $password, $database);
-
-if (htmlspecialchars($_SESSION["username"]) == "debug") {
-    $userrecappi = "%";
-} else {
-    $userrecappi = htmlspecialchars($_SESSION["username"]);
-}
-$filename = 'comptabilite_albinton.csv';
-
 $resultcol = mysqli_query(dbconnect, "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'albin549889' AND TABLE_NAME = 'comptabilite' ORDER BY `ORDINAL_POSITION`; ") or die("Selection Error " . mysqli_error(dbconnect));
 // $resultcol = mysqli_query(dbconnect, "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'albinton' AND TABLE_NAME = 'comptabilite' ORDER BY `ORDINAL_POSITION`; ") or die("Selection Error " . mysqli_error(dbconnect));
 while($row = mysqli_fetch_assoc($resultcol)) {
@@ -45,23 +22,18 @@ while($row = mysqli_fetch_assoc($resultcol)) {
 }
 
 $sql = "SELECT * FROM `comptabilite` WHERE `id` <> '1' ORDER BY `id` ASC;";
-// SELECT * FROM `clients` WHERE `user` like "william"AND `etatvisite` <> 'NON' ORDER BY nom ASC
 
 // fetch mysql table rows
 // $sql = "select * from tbl_books";
 $result = mysqli_query(dbconnect, $sql) or die("Selection Error " . mysqli_error(dbconnect));
 
-$fp = fopen('./'.$filename, 'w');
+$fp = fopen('./comptabilite_albinton.csv', 'w');
 
 fputcsv($fp, $header, ';');
 while($row = mysqli_fetch_assoc($result)) {
     fputcsv($fp, $row, $delimiter = ';');
 }
 fclose($fp);
-
-
-//mysqli_close(dbconnect);
-// header('Location: generation.php');
 ?>
 <?php
 session_start();
@@ -75,7 +47,8 @@ window.location.href = "login.php";
 
 //Read the filename
 
-//Check the file exists or not
+$filename = 'comptabilite_albinton.csv';
+// Check the file exists or not
 if(file_exists($filename)) {
 
     //Define header information
