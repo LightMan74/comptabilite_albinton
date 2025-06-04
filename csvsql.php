@@ -13,7 +13,7 @@ window.location.href = "login.php";
     }
 }
 
-include 'config.php';
+// include 'config.php';
 
 $resultcol = mysqli_query(dbconnect, "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'albin549889' AND TABLE_NAME = 'comptabilite' ORDER BY `ORDINAL_POSITION`; ") or die("Selection Error " . mysqli_error(dbconnect));
 // $resultcol = mysqli_query(dbconnect, "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'albinton' AND TABLE_NAME = 'comptabilite' ORDER BY `ORDINAL_POSITION`; ") or die("Selection Error " . mysqli_error(dbconnect));
