@@ -160,7 +160,7 @@ function loadpieces()
             echo "<td>" . $row["timestamp"] . "</td>";
 
             echo "<td>" . $row["DATE_FACTURE"] . "</td>";
-            echo "<td style='font-size:85%'>" . $row["IDMOIS"] . "</td>";
+            echo "<td style='font-size:85%'>" . $row["SAISON"] . "</td>";
             // echo "<td style='font-size:75%'>" . $row["DEBIT"] . "</td>";
             // echo "<td style='font-size:75%'>" . $row["CREDIT"] . "</td>";
             echo "<td style='font-size:75%'>";
