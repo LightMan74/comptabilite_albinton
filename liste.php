@@ -166,7 +166,7 @@ if (isset($_POST['config'])) {
     }
     // echo '<script src="CSS_JS/clipboard.min.js"></script>';
     echo '<script src="CSS_JS/tablefilter/tablefilter.js"></script>';
-    echo '<script type="text/javascript" src="parametretableau.js"></script>';
+    echo '<script type="text/javascript" src="parametretableau.js?modified='.filemtime("CSS_JS/facture.js").'"></script>';
 }
     ?>
     <div class="modif-popup_close" id="modif-popup">
