@@ -97,6 +97,7 @@ var tfConfig = {
 
     // col_0: 'none',
     // col_1: 'none',
+    col_3: 'select',
     col_5: 'select',
     // col_8: 'select',
     // col_27: 'select',
