@@ -63,8 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $sql .=  "`VIR`='0.00',";
         }
-        if ($_POST["IDMOIS"] != '') {
-            $sql .=  "`IDMOIS`='".$_POST["IDMOIS"]."',";
+        if ($_POST["SAISON"] != '') {
+            $sql .=  "`SAISON`='".$_POST["SAISON"]."',";
         }
         if ($_POST["CREATE_TIMESTAMP"] != '') {
             $sql .= "`CREATE_TIMESTAMP`='".$_POST["CREATE_TIMESTAMP"]."',";

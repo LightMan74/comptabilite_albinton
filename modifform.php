@@ -187,11 +187,11 @@ echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de 
                 <table id="aze" class="blueTable tablenoFixHead">
                     <tr>
                         <th style="width:50%;">
-                            <br>IDMOIS<br>
-                            <select id="selectidmois" style="width:100%;height: 3vh;text-align: center;" name="IDMOIS2" onchange="energiechange('selectidmois','autreselectidmois')">
+                            <br>SAISON<br>
+                            <select id="selectSAISON" style="width:100%;height: 3vh;text-align: center;" name="SAISON2" onchange="energiechange('selectSAISON','autreselectSAISON')">
                                 <?php
-                                if ($row['IDMOIS'] != "") {
-                                    echo '<option value="'.$row['IDMOIS'].'">'.$row['IDMOIS'].'</option>';
+                                if ($row['SAISON'] != "") {
+                                    echo '<option value="'.$row['SAISON'].'">'.$row['SAISON'].'</option>';
                                 }
         $startdate = date("Y")+1;
         $enddate = date("Y")-2;        
@@ -203,8 +203,8 @@ echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de 
                                 <option value="AUTRE" selected>AUTRE</option>
                             </select>
                             <script>
-                            document.getElementById('selectidmois').value = '<?php if ($row['IDMOIS'] != "") {
-                                    echo $row['IDMOIS'];
+                            document.getElementById('selectSAISON').value = '<?php if ($row['SAISON'] != "") {
+                                    echo $row['SAISON'];
                                 } else {
                                     if (date("m")>6){
                                         echo date("Y") ."-".date("Y") + 1;
@@ -213,8 +213,8 @@ echo $splitdate[2]."-".$splitdate[1]."-".$splitdate[0];?>" placeholder="Date de 
                                 }
                                 }?>';
                             </script>
-                            <input name="IDMOIS" id="autreselectidmois" value="<?php if ($row['IDMOIS'] != "") {
-                                echo $row['IDMOIS'];
+                            <input name="SAISON" id="autreselectSAISON" value="<?php if ($row['SAISON'] != "") {
+                                echo $row['SAISON'];
                             } else {
                                 if (date("m")>6){
                                     echo date("Y") ."-".date("Y") + 1;

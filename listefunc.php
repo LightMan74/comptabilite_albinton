@@ -48,8 +48,15 @@ if (htmlspecialchars($_GET["WHERE"]) != "") {
 if (isset($_GET['removefilter']) || empty($_SESSION["comptacheckpoint"])) {
     $_SESSION["comptacheckpoint"] = '1';
     echo "<script>var filteratstart2 = '';</script>";
-    $_SESSION["WHERE"] = '1';
+    if (date("m")>6){
+        $whereannee = date("Y") ."-".date("Y") + 1;
+    }else{
+        $whereannee =  date("Y") - 1 ."-".date("Y") ;
+    }
+    $_SESSION["WHERE"] = '`SAISON` = \''.$whereannee.'\'';
 }
+
+$_SESSION["WHERE"] = html_entity_decode($_SESSION["WHERE"]);
 
 function loadpieces()
 {
