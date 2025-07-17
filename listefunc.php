@@ -91,10 +91,10 @@ function loadpieces()
     $sql = "SELECT *,(SELECT count(*) FROM `compta_files` where `comptabilite`.`id` = `compta_files`.`idclient`) as 'FILES_COUNT' FROM `comptabilite` WHERE `id` <> '1' AND  " . $wherecondition;
     $sql2 = "SELECT
     IFNULL((SELECT TYPE_CD FROM `config_compta` WHERE `id`=1),0) as soldedepart, 
-    IFNULL((SELECT sum(`VIR`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` is not null),0)-
-    IFNULL((SELECT sum(`VIR`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` is not null),0) as compte_reel,
-    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` is null),0) as credit, 
-    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` is null),0) as debit;";
+    IFNULL((SELECT sum(`VIR`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` <> ''),0)-
+    IFNULL((SELECT sum(`VIR`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` <> ''),0) as compte_reel,
+    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` = ''),0) as credit, 
+    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` = ''),0) as debit;";
     // SELECT * FROM `comptabilite` WHERE `DEBIT` is not null and TTC <> (`CB`+`VIR`+`ESP`) and `ISERROR` <> 1;
     // $sql2 = "SELECT ''";
     $result2 = mysqli_query(dbconnect, $sql2);
@@ -108,7 +108,7 @@ function loadpieces()
             echo '<br>COMPTE COURANT --> <span id="COMPTE_COURANT">'.sprintf('%0.2f', ($row["compte_reel"] + $row["soldedepart"])).'</span> €';
             echo ' --- A PAYER --> <span id="COMPTE_COURANT_APAYER">'.$row["debit"].'</span> €';
             echo ' --- A RENTRER --> <span id="COMPTE_COURANT_APAYER">'.$row["credit"].'</span> €';
-            echo ' --- COMPTE COURANT APRES RBS ET PAYEMENT --> <span id="COMPTE_COURANT_REEL">'.sprintf('%0.2f', (($row["compte_reel"] - $row["debit"]) + $row["credit"])).'</span> €';
+            echo ' --- COMPTE COURANT APRES RBS ET PAYEMENT --> <span id="COMPTE_COURANT_REEL">'.sprintf('%0.2f', (($row["compte_reel"] + $row["soldedepart"] - $row["debit"]) + $row["credit"])).'</span> €';
         }
     }
     $sqlogs = 'INSERT INTO `logs_compta` (`user`, `action`) VALUES ("' . $_SESSION["username"] . '","' . $sql . '")';
@@ -130,9 +130,9 @@ function loadpieces()
             <th style="width:6%">timestamp</th>
             <th style="width:6%">DATE_FACTURE</th>
             <th style="width:6%;font-size:85%">SAISON</th>
-            <!-- <th style="width:6%;font-size:75%">DEBIT</th> -->
-            <!-- <th style="width:6%;font-size:75%">CREDIT</th> -->
-            <th style="width:6%">CorD</th>
+            <th style="width:6%;font-size:75%">DEBIT</th>
+            <th style="width:6%;font-size:75%">CREDIT</th>
+            <!-- <th style="width:6%">CorD</th> -->
             <th style="width:6%">TYPE</th>
             <th style="width:6%">TTC</th>
             <th style="width:15%;font-size:85%">CLIENTS_FOURNISEUR</th>
@@ -161,16 +161,16 @@ function loadpieces()
 
             echo "<td>" . $row["DATE_FACTURE"] . "</td>";
             echo "<td style='font-size:85%'>" . $row["SAISON"] . "</td>";
-            // echo "<td style='font-size:75%'>" . $row["DEBIT"] . "</td>";
-            // echo "<td style='font-size:75%'>" . $row["CREDIT"] . "</td>";
-            echo "<td style='font-size:75%'>";
-            if ($row["CREDIT"] <> "") {
-                echo "CREDIT";
-            }
-            if ($row["DEBIT"] <> "") {
-                echo "DEBIT";
-            }
-            echo "</td>";
+            echo "<td style='font-size:75%'>" . $row["DEBIT"] . "</td>";
+            echo "<td style='font-size:75%'>" . $row["CREDIT"] . "</td>";
+            // echo "<td style='font-size:75%'>";
+            // if ($row["CREDIT"] <> "") {
+            //     echo "CREDIT";
+            // }
+            // if ($row["DEBIT"] <> "") {
+            //     echo "DEBIT";
+            // }
+            // echo "</td>";
             echo "<td>" . $row["TYPE"] . "</td>";
             echo "<td>" . number_format($row["TTC"], 2, ".", "") . "</td>";
             echo "<td style='font-size:85%'>" . $row["CLIENTS_FOURNISEUR"] . "</td>";

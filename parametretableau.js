@@ -75,13 +75,15 @@ var tfConfig = {
     load_filters_on_demand: false, //true
 
     no_results_message: true,
-    watermark: ['id', 'timestamp', 'DATE_FACTURE', 'SAISON', 'CorD', 'TYPE', 'TTC', 'CLIENTS_FOURNISEUR', 'REMARQUES_DIVERSES', 'DATE_PAIEMENT', 'MONTANT', 'OPTIONS', 'ERREUR', 'FICHIER'],
+    // watermark: ['id', 'timestamp', 'DATE_FACTURE', 'SAISON', 'CorD', 'TYPE', 'TTC', 'CLIENTS_FOURNISEUR', 'REMARQUES_DIVERSES', 'DATE_PAIEMENT', 'MONTANT', 'OPTIONS', 'ERREUR', 'FICHIER'],
+    watermark: ['id', 'timestamp', 'DATE_FACTURE', 'SAISON', 'DEBIT', 'CREDIT', 'TYPE', 'TTC', 'CLIENTS_FOURNISEUR', 'REMARQUES_DIVERSES', 'DATE_PAIEMENT', 'MONTANT', 'OPTIONS', 'ERREUR', 'FICHIER'],
     //['id', 'timestamp', 'N_FACTURE', 'DATE_FACTURE', 'IDMOIS', 'DEBIT', 'CREDIT', 'TYPE', 'TVA', 'HT', 'TVA', 'TTC', 'T_HT', 'T_TVA', 'T_TTC', 'CLIENTS_FOURNISEUR', 'REMARQUES_DIVERSES', 'DATE_PAYEMENT', 'CB', 'VIR', 'ESP', 'CHQ', 'BANQUE', 'N_CHEQUE', 'TITULAIRE_CHEQUE', 'TOTAL_PAYMENT', 'RBS', 'COMPTE_DEBIT', 'COMPTE_CREDIT', 'OPTIONS', 'ISEEROR', 'UPLOAD_COMPTA', 'COPIE'],
     col_types: [
         'number',
         { type: 'date', locale: 'fr', format: ['{yyyy}-{MM}-{dd} {hh}:{mm}:{ss}'] },
         { type: 'date', locale: 'fr', format: ['{dd}/{MM}/{yyyy}'] },
         { type: 'date', locale: 'fr', format: ['{yyyy}-{MM}'] },
+        'string',
         'string',
         'string',
         'number',
@@ -97,17 +99,18 @@ var tfConfig = {
 
     // col_0: 'none',
     // col_1: 'none',
+
+    // col_3: 'select',
+    // col_5: 'select',
+    // col_11: 'none',
+    // col_12: 'select',
+    // col_13: 'select',
+
     col_3: 'select',
-    col_5: 'select',
-    // col_8: 'select',
-    // col_27: 'select',
-    // col_28: 'select',
-    // col_29: 'none',
-    // col_30: 'select',
-    // col_31: 'select',
-    col_11: 'none',
-    col_12: 'select',
+    col_6: 'select',
+    col_12: 'none',
     col_13: 'select',
+    col_14: 'select',
 
 };
 

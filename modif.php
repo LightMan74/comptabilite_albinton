@@ -26,6 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST["DATE_PAYEMENT"] != '') {
         $splitdate = explode("-", $_POST["DATE_PAYEMENT"]);
         $_POST["DATE_PAYEMENT"] =  $splitdate[2]."/".$splitdate[1]."/".$splitdate[0];
+    }else{
+        $_POST["DATE_PAYEMENT"] = $_POST["DATE_PAYEMENT"];
     }
 
     if (isset($_POST['modifitem']) || isset($_POST['additem'])) {
@@ -55,9 +57,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($_POST["REMARQUE"] != '') {
             $sql .=  "`REMARQUE_DIVERSE`='".strtoupper(str_replace("'", "\'", $_POST["REMARQUE"]))."',";
         }
-        if ($_POST["DATE_PAYEMENT"] != '') {
+        // if ($_POST["DATE_PAYEMENT"] != '') {
             $sql .=  "`DATE_PAYEMENT`='".str_replace("'", "\'", $_POST["DATE_PAYEMENT"])."',";
-        }
+        // }
         if ($_POST["VIR"] != '') {
             $sql .=  "`VIR`='".$_POST["VIR"]."',";
         } else {
