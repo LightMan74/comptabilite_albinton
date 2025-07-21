@@ -133,17 +133,17 @@ function parseRows(tf) {
     rowsIdx.forEach(function (idx) {
         var row = tf.dom().rows[idx];
 
-        var cell = row.cells[10];
-        var cellref = row.cells[6];
-        var cellref1 = row.cells[12];
+        var cell = row.cells[11];
+        var cellref = row.cells[7];
+        var cellref1 = row.cells[13];
         formatCell(tf, cell, 'TOTAL_PAYEMENT', cellref, cellref1);
 
-        var cell = row.cells[9];
+        var cell = row.cells[10];
         formatCell(tf, cell, 'DATE_PAYEMENT');
 
 
         var cell = row.cells[13];
-        var cellref = row.cells[2];
+        var cellref = row.cells[3];
         formatCell(tf, cell, 'FICHIER', cellref);
     });
 }
