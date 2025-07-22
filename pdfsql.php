@@ -21,7 +21,7 @@ include('config.php');
 include('mysql_table.php');
 
 
-$result = mysqli_query(dbconnect, "SELECT DISTINCT `IDMOIS` FROM `comptabilite` where `id` <> 1 order by `IDMOIS` DESC;");
+$result = mysqli_query(dbconnect, "SELECT DISTINCT `SAISON` FROM `comptabilite` where `id` <> 1 order by `SAISON` DESC;");
 
 
 $prop = array('HeaderColor' => array(255,255,210),
@@ -36,25 +36,25 @@ if (mysqli_num_rows($result) > 0) {
         // EXPORT TOTAL
 
         $sql =
-        "SELECT `IDMOIS` AS MorA, 'TOTAL' as TYPE,
+        "SELECT `SAISON` AS MorA, 'TOTAL' as TYPE,
         SUM(case when `CREDIT` IS NOT NULL then `VIR` else 0 end) AS CREDIT_TTC,
         SUM(case when `CREDIT` IS NULL then `VIR` else 0 end) AS DEBIT_TTC
-        FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `IDMOIS`
+        FROM `comptabilite` WHERE `SAISON` IS NOT NULL AND `SAISON` = '".$row["SAISON"]."' GROUP BY `SAISON`
         UNION ALL
         SELECT '' AS MorA, '' as TYPE,
         '' AS CREDIT_TTC,
         '' AS DEBIT_TTC
         UNION ALL
-        SELECT `IDMOIS` AS MorA, `TYPE`,
+        SELECT `SAISON` AS MorA, `TYPE`,
         SUM(case when `CREDIT` IS NOT NULL then `VIR` else 0 end) AS CREDIT_TTC,
         SUM(case when `CREDIT` IS NULL then `VIR` else 0 end) AS DEBIT_TTC
-        FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `TYPE` ORDER BY FIELD(`TYPE`,'','TOTAL','SOLDE') ASC, `TYPE` ASC;";
+        FROM `comptabilite` WHERE `SAISON` IS NOT NULL AND `SAISON` = '".$row["SAISON"]."' GROUP BY `TYPE` ORDER BY FIELD(`TYPE`,'','TOTAL','SOLDE') ASC, `TYPE` ASC;";
 
         $pdf->AddPage('P', 'A4');
         
 
         $pdf->AddCol('str', 200, 'BILAN FINANCIER', 'C');
-        $pdf->Table(dbconnect, "SELECT '".$row["IDMOIS"]."' as str", $prop);
+        $pdf->Table(dbconnect, "SELECT '".$row["SAISON"]."' as str", $prop);
 
         $pdf->AddCol('TYPE', 100, 'CATEGORIE', 'C');
         $pdf->AddCol('CREDIT_TTC', 50, 'CREDIT_TTC', 'C');
@@ -64,7 +64,7 @@ if (mysqli_num_rows($result) > 0) {
         $sql = "SELECT
         truncate(SUM(case when `CREDIT` IS NOT NULL then `VIR` else 0 end) -
         SUM(case when `CREDIT` IS NULL then `VIR` else 0 end),2) AS SOLDE_TTC
-        FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `IDMOIS`";
+        FROM `comptabilite` WHERE `SAISON` IS NOT NULL AND `SAISON` = '".$row["SAISON"]."' GROUP BY `SAISON`";
         $pdf->AddCol('', 100, '', 'C');
         $pdf->AddCol('SOLDE_TTC', 100, 'RESULTAT', 'C');
         $pdf->Table(dbconnect, $sql, $prop);
@@ -73,19 +73,19 @@ if (mysqli_num_rows($result) > 0) {
         ROUND(IFNULL((SELECT TYPE_CD FROM `config_compta` WHERE `id`=1) +
         SUM(case when `CREDIT` IS NOT NULL then `VIR` else 0 end) -
         SUM(case when `CREDIT` IS NULL then `VIR` else 0 end),0),2) as soldedepart
-        FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `IDMOIS`";
+        FROM `comptabilite` WHERE `SAISON` IS NOT NULL AND `SAISON` = '".$row["SAISON"]."' GROUP BY `SAISON`";
         $pdf->AddCol('soldedepart', 200, 'SOLDE COMPTE COURANT', 'C');
         $pdf->Table(dbconnect, $sql, $prop);
 
         $sql = "SELECT
         ROUND(IFNULL((SELECT TYPE_CD FROM `config_compta` WHERE `id`=2),0),2) as soldedepart
-        FROM `comptabilite` WHERE `IDMOIS` IS NOT NULL AND `IDMOIS` = '".$row["IDMOIS"]."' GROUP BY `IDMOIS`";
+        FROM `comptabilite` WHERE `SAISON` IS NOT NULL AND `SAISON` = '".$row["SAISON"]."' GROUP BY `SAISON`";
         $pdf->AddCol('soldedepart', 200, 'SOLDE COMPTE EPARGNE', 'C');
         $pdf->Table(dbconnect, $sql, $prop);
 
 
         // EXPORT LISTE
-        $sql = "SELECT `id`, `DATE_FACTURE`, `IDMOIS`, `DEBIT`, `CREDIT`, `TYPE`, `TTC`, `CLIENTS_FOURNISEUR`, `REMARQUE_DIVERSE`, `DATE_PAYEMENT`, `VIR`, `ISERROR`, IF(`VIR` > `TTC`,1,0) AS totalpayementup, IF(`VIR` < `TTC`,1,0) AS totalpayementdown FROM `comptabilite` WHERE `id` <> '1' AND  `IDMOIS` = '" . $row["IDMOIS"]."' ORDER BY `DEBIT` ASC, cast(concat(SUBSTR(`DATE_FACTURE`, 7, 4), SUBSTR(`DATE_FACTURE`, 4, 2), SUBSTR(`DATE_FACTURE`, 1, 2)) as unsigned) DESC";
+        $sql = "SELECT `id`, `DATE_FACTURE`, `SAISON`, `DEBIT`, `CREDIT`, `TYPE`, `TTC`, `CLIENTS_FOURNISEUR`, `REMARQUE_DIVERSE`, `DATE_PAYEMENT`, `VIR`, `ISERROR`, IF(`VIR` > `TTC`,1,0) AS totalpayementup, IF(`VIR` < `TTC`,1,0) AS totalpayementdown FROM `comptabilite` WHERE `id` <> '1' AND  `SAISON` = '" . $row["SAISON"]."' ORDER BY `DEBIT` ASC, cast(concat(SUBSTR(`DATE_FACTURE`, 7, 4), SUBSTR(`DATE_FACTURE`, 4, 2), SUBSTR(`DATE_FACTURE`, 1, 2)) as unsigned) DESC";
     
     
         $pdf->AddPage("L","A4");
@@ -100,13 +100,13 @@ if (mysqli_num_rows($result) > 0) {
         $pdf->Table(dbconnect, $sql, $prop);
 
         // EXPORT DETAIL
-        $sql = "SELECT `id`, `DATE_FACTURE`, `IDMOIS`, `DEBIT`, `CREDIT`, `TYPE`, `TTC`, `CLIENTS_FOURNISEUR`, `REMARQUE_DIVERSE`, `DATE_PAYEMENT`, `VIR`, `ISERROR`, IF(`VIR` > `TTC`,1,0) AS totalpayementup, IF(`VIR` < `TTC`,1,0) AS totalpayementdown FROM `comptabilite` WHERE `id` <> '1' AND  `IDMOIS` = '" . $row["IDMOIS"]."' ORDER BY `DEBIT` ASC, cast(concat(SUBSTR(`DATE_FACTURE`, 7, 4), SUBSTR(`DATE_FACTURE`, 4, 2), SUBSTR(`DATE_FACTURE`, 1, 2)) as unsigned) DESC";
+        $sql = "SELECT `id`, `DATE_FACTURE`, `SAISON`, `DEBIT`, `CREDIT`, `TYPE`, `TTC`, `CLIENTS_FOURNISEUR`, `REMARQUE_DIVERSE`, `DATE_PAYEMENT`, `VIR`, `ISERROR`, IF(`VIR` > `TTC`,1,0) AS totalpayementup, IF(`VIR` < `TTC`,1,0) AS totalpayementdown FROM `comptabilite` WHERE `id` <> '1' AND  `SAISON` = '" . $row["SAISON"]."' ORDER BY `DEBIT` ASC, cast(concat(SUBSTR(`DATE_FACTURE`, 7, 4), SUBSTR(`DATE_FACTURE`, 4, 2), SUBSTR(`DATE_FACTURE`, 1, 2)) as unsigned) DESC";
     
         
         $pdf->AddPage("L","A3");
         $pdf->AddCol('id', 10, 'id', 'C');
         $pdf->AddCol('DATE_FACTURE', 30, 'D_FACTURE', 'C');
-        $pdf->AddCol('IDMOIS', 30, 'SAISON', 'C');
+        $pdf->AddCol('SAISON', 30, 'SAISON', 'C');
         $pdf->AddCol('DEBIT', 5, 'D', 'C');
         $pdf->AddCol('CREDIT', 5, 'C', 'C');
         $pdf->AddCol('TYPE', 50, 'CATEGORIE', 'C');
