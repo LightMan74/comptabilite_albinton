@@ -119,6 +119,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // Close connection
     //mysqli_close($link);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -142,8 +143,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <div class="wrapper" style="margin: 0 auto; text-align: center;">
-        <h2><a style="color:inherit; text-decoration: inherit " href="https://albinton.fr"
-                class="fullwidth">ALB'INTON</a></br>COMPTABILITE</br>
+        <h2><a style="color:inherit; text-decoration: inherit " href="https://albinton.fr" class="fullwidth">ALB'INTON</a></br>COMPTABILITE</br>
         </h2>
         <h2>Connexion</h2>
         <p>Veuillez remplir vos identifiants pour vous connecter.</p>
@@ -161,8 +161,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="form-group <?php echo (!empty($TOTP_err)) ? 'has-error' : ''; ?>">
                 <label>2FA - TOTP</label>
-                <input type="text" name="totp" class="form-control" inputmode="numeric" pattern="[0-9]*"
-                    autocomplete="one-time-code">
+                <input type="text" name="totp" class="form-control" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code">
                 <span class="help-block"><?php echo $TOTP_err; ?></span>
             </div>
             <div class="form-group">

@@ -1,6 +1,9 @@
 <?php
 
 // echo $_SERVER['SERVER_NAME'];
+if ($_SERVER['SERVER_NAME'] == "comptalbinton.lansard.ch") {
+    include "../../configuserlogin.php";
+}
 if ($_SERVER['SERVER_NAME'] == "site.lansard.ch") {
     include "../../configuserlogin.php";
 }

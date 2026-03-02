@@ -1,5 +1,9 @@
 <?php
 
+    // define('DB_NAME', 'albinton');
+if ($_SERVER['SERVER_NAME'] == "comptalbinton.lansard.ch") {
+    define('DB_NAME', 'albinton');
+}
 if ($_SERVER['SERVER_NAME'] == "site.lansard.ch") {
     define('DB_NAME', 'albinton');
 }
