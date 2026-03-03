@@ -12,7 +12,7 @@ use setasign\Fpdi\Fpdi;
 // ============================================================
 // $output_dir  = './exports/';
 // $output_file = $output_dir . 'export_compta_' . date('Y-m-d_His') . '.pdf';
-$output_file = 'export_compta_files_albinton_' . date('Y-m-d_His') . '.pdf';
+// $output_file = 'export_compta_files_albinton_' . date('Y-m-d_His') . '.pdf';
 
 // ============================================================
 // CRÉATION DU DOSSIER DE SORTIE
@@ -24,7 +24,14 @@ $output_file = 'export_compta_files_albinton_' . date('Y-m-d_His') . '.pdf';
 // ============================================================
 // RÉCUPÉRATION DES DONNÉES
 // ============================================================
-$result = mysqli_query(dbconnect, "SELECT name, extension, file FROM compta_files");
+if (isset($_GET["SAISON"])){
+    $wheresql = ' WHERE `idclient` IN (SELECT `id` FROM `comptabilite` where `SAISON` = "'.$_GET["SAISON"].'")';
+    $output_file = 'export_compta_files_albinton_'.$_GET["SAISON"].'_'.date('Y-m-d_His') . '.pdf';
+}else{    
+    $output_file = 'export_compta_files_albinton_' . date('Y-m-d_His') . '.pdf';
+}
+
+$result = mysqli_query(dbconnect, "SELECT name, extension, file FROM compta_files".$wheresql);
 $files  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 if (empty($files)) {
