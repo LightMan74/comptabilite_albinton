@@ -24,6 +24,7 @@ use setasign\Fpdi\Fpdi;
 // ============================================================
 // RÉCUPÉRATION DES DONNÉES
 // ============================================================
+$wheresql = "";
 if (isset($_GET["SAISON"])){
     $wheresql = ' WHERE `idclient` IN (SELECT `id` FROM `comptabilite` where `SAISON` = "'.$_GET["SAISON"].'")';
     $output_file = 'export_compta_files_albinton_'.$_GET["SAISON"].'_'.date('Y-m-d_His') . '.pdf';
