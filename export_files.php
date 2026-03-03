@@ -1,4 +1,18 @@
 <?php
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+if(php_sapi_name() != 'cli') {
+    // session_start();
+    if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] != true) {
+        ?>
+<script type="text/javascript">
+window.location.href = "login.php";
+</script>
+<?php
+    }
+}
+
 
 require_once 'vendor/autoload.php';
 // require_once 'dbconnect.php'; // Votre connexion existante
