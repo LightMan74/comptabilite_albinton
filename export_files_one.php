@@ -10,15 +10,16 @@ use setasign\Fpdi\Fpdi;
 // ============================================================
 // CONFIGURATION
 // ============================================================
-$output_dir  = './exports/';
-$output_file = $output_dir . 'export_compta_' . date('Y-m-d_His') . '.pdf';
+// $output_dir  = './exports/';
+// $output_file = $output_dir . 'export_compta_' . date('Y-m-d_His') . '.pdf';
+$output_file = 'export_compta_files_albinton_' . date('Y-m-d_His') . '.pdf';
 
 // ============================================================
 // CRÉATION DU DOSSIER DE SORTIE
 // ============================================================
-if (!is_dir($output_dir)) {
-    mkdir($output_dir, 0755, true);
-}
+// if (!is_dir($output_dir)) {
+//     mkdir($output_dir, 0755, true);
+// }
 
 // ============================================================
 // RÉCUPÉRATION DES DONNÉES
@@ -80,7 +81,7 @@ foreach ($files as $row) {
             }
 
             $success++;
-            echo "✅ PDF ajouté ({$pageCount} page(s)) : {$name}<br>";
+            // echo "✅ PDF ajouté ({$pageCount} page(s)) : {$name}<br>";
 
         } catch (Exception $e) {
             $errors[] = "❌ Erreur PDF [{$name}] : " . $e->getMessage();
@@ -124,7 +125,7 @@ foreach ($files as $row) {
             $fpdi->Image($tmp_image, $x, $y, $final_width, $final_height, $img_type);
 
             $success++;
-            echo "✅ Image ajoutée : {$name}<br>";
+            // echo "✅ Image ajoutée : {$name}<br>";
 
         } catch (Exception $e) {
             $errors[] = "❌ Erreur Image [{$name}] : " . $e->getMessage();
@@ -143,10 +144,11 @@ foreach ($files as $row) {
 // SAUVEGARDE DU DOCUMENT UNIQUE
 // ============================================================
 if ($success > 0) {
-    $fpdi->Output('F', $output_file);
-    echo "<hr>📄 Fichier PDF généré : <strong>{$output_file}</strong><br>";
+    // $fpdi->Output('F', $output_file);
+    $fpdi->Output('I', $output_file);
+    // echo "<hr>📄 Fichier PDF généré : <strong>{$output_file}</strong><br>";
 } else {
-    echo "<hr>⚠️ Aucun fichier valide traité, PDF non généré.<br>";
+    // echo "<hr>⚠️ Aucun fichier valide traité, PDF non généré.<br>";
 }
 
 // ============================================================
@@ -161,11 +163,11 @@ foreach ($tmp_files as $tmp) {
 // ============================================================
 // RÉSUMÉ
 // ============================================================
-echo "<hr>";
-echo "✅ Succès : {$success} fichier(s) ajouté(s)<br>";
-echo "❌ Erreurs : " . count($errors) . "<br>";
+// echo "<hr>";
+// echo "✅ Succès : {$success} fichier(s) ajouté(s)<br>";
+// echo "❌ Erreurs : " . count($errors) . "<br>";
 foreach ($errors as $error) {
-    echo "&nbsp;&nbsp;→ {$error}<br>";
+    // echo "&nbsp;&nbsp;→ {$error}<br>";
 }
 
 // ============================================================
