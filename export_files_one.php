@@ -3,7 +3,7 @@
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 if(php_sapi_name() != 'cli') {
-    // session_start();
+    session_start();
     if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] != true) {
         ?>
 <script type="text/javascript">
