@@ -65,12 +65,6 @@ if (mysqli_num_rows($result) > 0) {
         truncate(SUM(case when `CREDIT` IS NOT NULL then `VIR` else 0 end) -
         SUM(case when `CREDIT` IS NULL then `VIR` else 0 end),2) AS SOLDE_TTC
         FROM `comptabilite` WHERE `SAISON` IS NOT NULL AND `SAISON` = '".$row["SAISON"]."' GROUP BY `SAISON`";
-        $sql="SELECT    
-            IFNULL((SELECT sum(`VIR`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` <> '' and `SAISON` = '2025-2026'),0) -
-            IFNULL((SELECT sum(`VIR`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` <> '' and `SAISON` = '2025-2026'),0) +
-            IFNULL((SELECT TYPE_CD FROM `config_compta` WHERE `id`=1),0) -     
-            IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` = '' and `SAISON` = '2025-2026'),0) +
-            IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` = '' and `SAISON` = '2025-2026'),0);";
         $pdf->AddCol('', 100, '', 'C');
         $pdf->AddCol('SOLDE_TTC', 100, 'RESULTAT', 'C');
         $pdf->Table(dbconnect, $sql, $prop);
