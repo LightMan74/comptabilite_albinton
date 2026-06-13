@@ -94,7 +94,7 @@ function loadpieces()
     IFNULL((SELECT sum(`VIR`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` <> ''),0)-
     IFNULL((SELECT sum(`VIR`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` <> ''),0) as compte_reel,
     IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` = ''),0) as credit, 
-    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` = ''),0) as debit;";
+    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` = ''),0) as debit where `SAISON` = '2025-2026';";
     // SELECT * FROM `comptabilite` WHERE `DEBIT` is not null and TTC <> (`CB`+`VIR`+`ESP`) and `ISERROR` <> 1;
     // $sql2 = "SELECT ''";
     $result2 = mysqli_query(dbconnect, $sql2);

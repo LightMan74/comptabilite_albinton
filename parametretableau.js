@@ -8,6 +8,7 @@ var tfConfig = {
             name: 'colsVisibility',
             at_start: filteratstart,
             text: 'Columns: ',
+            tick_to_hide: false,
             // enable_tick_all: true,
             toolbar_position: 'left'
         },
