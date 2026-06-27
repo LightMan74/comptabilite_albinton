@@ -155,14 +155,22 @@ if (isset($_POST['config'])) {
     loadpieces();
 
     if (isset($_GET['removefilter']) || $_SESSION["comptacheckpoint"] == '1') {
+        $_SESSION['keepfiltre'] = false;
         $_SESSION["comptacheckpoint"] = '2';
         echo "-->" . $_SESSION["comptacheckpoint"];
         // echo "<script>var filteratstart = [0, 1, 3, 12, 13];</script>";
-        echo "<script>var filteratstart = [0, 1, 3, 13, 14];</script>";
-
-        // echo "<script>var filteratstart = '';</script>";
+        echo "<script>var filteratstart = [0, 1, 3, 13];</script>";
+        
+$cookieName = '{"key":"TF_searchtable","path":"/liste_php"}';
+unset($_COOKIE[$cookieName]);
+?>
+    <script>
+    const cookieName = '{"key":"TF_searchtable","path":"/liste.php"}';
+    document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+    </script>
+    <?php
     } else {
-        echo "<script>var filteratstart = '';</script>";
+        echo "<script>var filteratstart = '';</script>";        
     }
     // echo '<script src="CSS_JS/clipboard.min.js"></script>';
     echo '<script src="CSS_JS/tablefilter/tablefilter.js"></script>';

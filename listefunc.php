@@ -120,7 +120,6 @@ function loadpieces()
         echo "</br>";
     } else {
         $result = mysqli_query(dbconnect, $sql);
-
         ?>
 <script type="text/javascript" src="CSS_JS/maintainscroll.js"></script>
 <table id="searchtable" class="blueTable tableFixHead">
@@ -208,7 +207,6 @@ function loadpieces()
             echo "<td>" . $row["ISERROR"] . "</td>";
             echo "<td>" . $row["FILES_COUNT"] . "</td>";
             ?>
-
         </tr>
         <?php
 
@@ -221,9 +219,9 @@ function loadpieces()
             <th>timestamp</th>
             <th>DATE_FACTURE</th>
             <th>SAISON</th>
-            <!-- <th>DEBIT</th>
-        <th>CREDIT</th> -->
-            <th>CorD</th>
+            <th>DEBIT</th>
+            <th>CREDIT</th>
+            <!-- <th>CorD</th> -->
             <th>TYPE</th>
             <th>TTC</th>
             <th>CLIENTS_FOURNISEUR</th>
@@ -232,6 +230,7 @@ function loadpieces()
             <th>MONTANT</th>
             <th>OPTIONS</th>
             <th>ERREUR</th>
+            <th>FICHIER</th>
         </tr>
     </tfoot>
 
