@@ -91,10 +91,10 @@ function loadpieces()
     $sql = "SELECT *,(SELECT count(*) FROM `compta_files` where `comptabilite`.`id` = `compta_files`.`idclient`) as 'FILES_COUNT' FROM `comptabilite` WHERE `id` <> '1' AND  " . $wherecondition;
     $sql2 = "SELECT
     IFNULL((SELECT TYPE_CD FROM `config_compta` WHERE `id`=1),0) as soldedepart, 
-    IFNULL((SELECT sum(`VIR`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` <> '' and `SAISON` = '2025-2026'),0)-
-    IFNULL((SELECT sum(`VIR`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` <> '' and `SAISON` = '2025-2026'),0) as compte_reel,
-    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` = '' and `SAISON` = '2025-2026'),0) as credit, 
-    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` = '' and `SAISON` = '2025-2026'),0) as debit;"; 
+    IFNULL((SELECT sum(`VIR`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` <> '' and `SAISON` = '2026-2027'),0)-
+    IFNULL((SELECT sum(`VIR`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` <> '' and `SAISON` = '2026-2027'),0) as compte_reel,
+    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `CREDIT` is not null and `DATE_PAYEMENT` = '' and `SAISON` = '2026-2027'),0) as credit, 
+    IFNULL((SELECT sum(`TTC`) FROM `comptabilite` WHERE `DEBIT` is not null and `DATE_PAYEMENT` = '' and `SAISON` = '2026-2027'),0) as debit;"; 
     // SELECT * FROM `comptabilite` WHERE `DEBIT` is not null and TTC <> (`CB`+`VIR`+`ESP`) and `ISERROR` <> 1;
     // $sql2 = "SELECT ''";
     $result2 = mysqli_query(dbconnect, $sql2);

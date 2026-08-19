@@ -19,6 +19,7 @@ if (isset($_POST['exportpatient'])) {
     exit();
 }
 ?>
+<html lang="fr">
 
 <body>
     <link rel="stylesheet" type="text/css" href="CSS_JS/popup.css" media="all">
